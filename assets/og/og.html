@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="pt-BR" class="js is-loaded">
+<head>
+<meta charset="utf-8">
+<title>PriceFleet — Open Graph</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap">
+<link rel="stylesheet" href="../css/styles.css">
+<style>
+  /* Gerado a partir do mockup do hero. Renderizar em 1200x630 e salvar como og-image.png */
+  html, body { margin: 0; width: 1200px; height: 630px; overflow: hidden; }
+  body {
+    position: relative;
+    background:
+      radial-gradient(60% 80% at 85% 10%, rgba(197,208,49,.35), rgba(197,208,49,0) 60%),
+      linear-gradient(135deg, var(--pf-green-700) 0%, var(--pf-green-500) 55%, var(--pf-green-400) 100%);
+  }
+  body::after { content: ""; position: absolute; inset: 0;
+    background-image: radial-gradient(circle, rgba(255,255,255,.14) 1px, transparent 1.2px); background-size: 24px 24px; }
+  .og-copy { position: absolute; left: 64px; top: 64px; width: 470px; z-index: 2; color: #fff; }
+  .og-logo { display: flex; align-items: center; gap: 12px; font-size: 28px; font-weight: 700; }
+  .og-logo svg { width: 44px; height: 44px; filter: drop-shadow(0 0 0 #fff); }
+  .og-logo span span { color: var(--pf-lime); }
+  .og-title { margin-top: 48px; font-size: 52px; line-height: 60px; font-weight: 700; letter-spacing: -0.015em; color: #fff; }
+  .og-sub { margin-top: 20px; font-size: 22px; line-height: 32px; color: rgba(255,255,255,.92); }
+  .og-pill { display: inline-block; margin-top: 32px; padding: 10px 18px; border-radius: 999px; background: var(--pf-lime); color: var(--pf-green-900); font-size: 18px; font-weight: 700; }
+  .og-mock { position: absolute; left: 548px; top: 92px; width: 1040px; transform: scale(.6); transform-origin: 0 0; z-index: 1; }
+  .og-mock .mock { box-shadow: 0 40px 80px -20px rgba(0,40,20,.55); }
+  .status__dot::after { display: none; }
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="g-pf-cover" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#009844"/><stop offset="1" stop-color="#C5D031"/>
+    </linearGradient>
+  </defs>
+  <!-- [cliente fornece SVG do logo] — marca provisória -->
+  <symbol id="logo-mark" viewBox="0 0 32 32">
+    <circle cx="16" cy="16" r="16" fill="#009844"/>
+    <path d="M11.5 23.5V9h6a4.6 4.6 0 0 1 0 9.2h-6" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="22.6" cy="22.6" r="2.2" fill="#C5D031"/>
+  </symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-8"/><path d="M14 7h7v7"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol>
+  <symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 3"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
+  <symbol id="i-flow" viewBox="0 0 24 24"><rect x="3" y="3" width="6" height="6" rx="1.5"/><rect x="15" y="15" width="6" height="6" rx="1.5"/><path d="M6 9v3a3 3 0 0 0 3 3h6"/></symbol>
+  <symbol id="i-sheet" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></symbol>
+  <symbol id="i-unlink" viewBox="0 0 24 24"><path d="m18.8 13.2 2.2-2.2a5 5 0 0 0-7-7l-2.2 2.2M5.2 10.8 3 13a5 5 0 0 0 7 7l2.2-2.2M8 2v3M2 8h3M16 22v-3M22 16h-3"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></symbol>
+  <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
+  <symbol id="i-bar" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+  <symbol id="i-kanban" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v12"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><circle cx="7" cy="7" r="1.5"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5z"/><path d="M4 19.5V22h16"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+  <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><path d="M3 21c3 0 7-1 7-8V5H3v8h4M14 21c3 0 7-1 7-8V5h-7v8h4"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 22V4M4 4h13l-2 4 2 4H4"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.6c0-1.34-.02-3.06-1.86-3.06-1.87 0-2.15 1.46-2.15 2.96V21H9z"/></symbol>
+  <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor" stroke="none"/></symbol>
+</svg>
+<div class="og-copy">
+  <div class="og-logo"><svg viewBox="0 0 32 32"><circle cx="16" cy="16" r="16" fill="#fff"/><path d="M11.5 23.5V9h6a4.6 4.6 0 0 1 0 9.2h-6" fill="none" stroke="#009844" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="22.6" cy="22.6" r="2.2" fill="#C5D031"/></svg><span>Price<span>Fleet</span></span></div>
+  <p class="og-title">Chega de precificar no escuro.</p>
+  <p class="og-sub">Precificação inteligente para locadoras, com valor residual e dados reais.</p>
+  <span class="og-pill">pricefleet.com.br</span>
+</div>
+<div class="og-mock">
+<div class="mock" role="img" aria-label="Prévia da tela de Projeção Residual do PriceFleet: assistente de seis etapas na etapa Projeção Residual, prazo de 36 meses, valores de compra, deflatores e valor final de venda projetado de R$ 65.494,54. Dados ilustrativos.">
+        <div class="mock__side">
+          <div class="mock__brand"><svg viewBox="0 0 32 32"><use href="#logo-mark"/></svg><span>PriceFleet</span></div>
+          <p class="mock__group">Home</p>
+          <ul class="mock__nav">
+            <li><svg class="icon"><use href="#i-home"/></svg><span>Início</span></li>
+            <li><svg class="icon"><use href="#i-kanban"/></svg><span>Kanban</span></li>
+          </ul>
+          <p class="mock__group">Preços</p>
+          <ul class="mock__nav">
+            <li class="is-active"><svg class="icon"><use href="#i-tag"/></svg><span>Solicitação de Preço</span></li>
+            <li><svg class="icon"><use href="#i-folder"/></svg><span>Portfólio</span></li>
+            <li><svg class="icon"><use href="#i-grid"/></svg><span>Categoria</span></li>
+            <li><svg class="icon"><use href="#i-sliders"/></svg><span>Parâmetros</span></li>
+          </ul>
+          <p class="mock__group">Gestão</p>
+          <ul class="mock__nav">
+            <li><svg class="icon"><use href="#i-bar"/></svg><span>Painéis</span></li>
+            <li><svg class="icon"><use href="#i-users"/></svg><span>Administração</span></li>
+            <li><svg class="icon"><use href="#i-book"/></svg><span>Tutoriais</span></li>
+          </ul>
+        </div>
+
+        <div class="mock__main">
+          <div class="mock__top">
+            <div class="mock__req">
+              <span class="mock__crumb">Solicitação de Preço</span>
+              <span class="mock__title">Nº 2026-0418</span>
+            </div>
+            <span class="status"><span class="status__dot"></span>Em Andamento</span>
+            <div class="mock__user"><span class="mock__user-name">Analista de Pricing</span><span class="avatar">AP</span></div>
+          </div>
+
+          <ol class="wizard" data-wizard>
+            <li class="is-done"><span class="wizard__dot"><span class="wizard__n">1</span><svg class="icon"><use href="#i-check"/></svg></span><span class="wizard__lbl">Dados Gerais</span></li>
+            <li class="is-done"><span class="wizard__dot"><span class="wizard__n">2</span><svg class="icon"><use href="#i-check"/></svg></span><span class="wizard__lbl">Contrato</span></li>
+            <li class="is-done"><span class="wizard__dot"><span class="wizard__n">3</span><svg class="icon"><use href="#i-check"/></svg></span><span class="wizard__lbl">Dados Veículo</span></li>
+            <li class="is-active"><span class="wizard__dot"><span class="wizard__n">4</span><svg class="icon"><use href="#i-check"/></svg></span><span class="wizard__lbl">Projeção Residual</span></li>
+            <li><span class="wizard__dot"><span class="wizard__n">5</span><svg class="icon"><use href="#i-check"/></svg></span><span class="wizard__lbl">Precificação</span></li>
+            <li><span class="wizard__dot"><span class="wizard__n">6</span><svg class="icon"><use href="#i-check"/></svg></span><span class="wizard__lbl">Revisão</span></li>
+          </ol>
+
+          <div class="mock__bar">
+            <span class="mock__h">Projeção Residual</span>
+            <div class="mock__period">
+              <span class="mock__period-lbl">Período (meses)</span>
+              <span class="ptabs"><span>12</span><span>18</span><span>24</span><span>30</span><span class="is-active">36</span></span>
+            </div>
+          </div>
+
+          <div class="mock__cols">
+            <div class="mcol mcol--compra">
+              <div class="mcol__h">Valores de Compra</div>
+              <div class="mfield"><span>Preço Público</span><b class="mval">R$ 98.590,00</b></div>
+              <div class="mfield"><span>Desconto Frotista</span><b class="mval">12,5% <i>· R$ 12.323,75</i></b></div>
+              <div class="mfield"><span>Valor de Compra</span><b class="mval mval--strong">R$ 86.266,25</b></div>
+              <div class="mfield"><span>Referência</span>
+                <div class="mradios">
+                  <span class="mradio"><i></i>DataCar</span><span class="mradio"><i></i>M. Depreciação</span><span class="mradio"><i></i>Residual</span><span class="mradio"><i></i>Fipe</span><span class="mradio is-on"><i></i>Média</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mcol mcol--defl">
+              <div class="mcol__h">Deflatores</div>
+              <div class="mrow"><span>Referência Inicial</span><b>78,4%</b></div>
+              <div class="mrow"><span>Franquia Km</span><b>−0,9%</b></div>
+              <div class="mrow"><span>Utilização</span><b>−0,6%</b></div>
+              <div class="mrow"><span>Desgaste</span><b>−0,5%</b></div>
+              <div class="mrow"><span>Descontinuidade</span><b>0,0%</b></div>
+              <div class="mrow"><span>Facelift</span><b>−0,5%</b></div>
+              <div class="mrow"><span>Fator de Ajuste</span><b>1,000</b></div>
+            </div>
+
+            <div class="mcol mcol--dep">
+              <div class="mcol__h">Depreciações <span class="mcol__tag">36 meses</span></div>
+              <svg class="mspark" viewBox="0 0 300 80" preserveAspectRatio="none">
+                <defs><linearGradient id="g-mspark" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#009844" stop-opacity=".22"/><stop offset="1" stop-color="#009844" stop-opacity="0"/></linearGradient></defs>
+                <path class="mspark__area" d="M0 8 C60 22 110 34 160 44 S250 58 300 62 L300 80 L0 80 Z" fill="url(#g-mspark)"/>
+                <path class="mspark__line" d="M0 8 C60 22 110 34 160 44 S250 58 300 62" pathLength="1"/>
+              </svg>
+              <div class="mrow"><span>Depreciação total</span><b>R$ 20.771,71</b></div>
+              <div class="mrow"><span>Depreciação mensal</span><b>R$ 576,99</b></div>
+              <div class="mrow"><span>Residual projetado</span><b>75,92%</b></div>
+              <div class="vfinal">
+                <span class="vfinal__lbl">Valor Final de Venda</span>
+                <strong class="vfinal__val" data-count="65494.54" data-decimals="2" data-prefix="R$ " data-count-manual>R$ 65.494,54</strong>
+                <span class="vfinal__sub">Projeção ao fim de 36 meses</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mock__foot">
+            <span class="mbtn mbtn--danger">Cancelar</span>
+            <span class="mock__foot-spacer"></span>
+            <span class="mbtn mbtn--outline">Atualizar Parâmetros</span>
+            <span class="mbtn">← Anterior</span>
+            <span class="mbtn mbtn--solid">Próximo →</span>
+          </div>
+        </div>
+      </div>
+</div>
+</body>
+</html>

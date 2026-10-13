@@ -1,0 +1,1437 @@
+<!doctype html>
+<html lang="pt-BR" class="no-js">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PriceFleet | Precificação inteligente para locadoras de veículos</title>
+  <meta name="description" content="Chega de precificar no escuro. O PriceFleet calcula, simula e valida o preço ideal de cada contrato de locação com base em valor residual e dados reais.">
+  <!-- Versão de revisão: não indexar. Remover no deploy do domínio oficial. -->
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://www.pricefleet.com.br/">
+  <meta name="theme-color" content="#009844">
+
+  <!-- Open Graph / Twitter -->
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="PriceFleet">
+  <meta property="og:url" content="https://www.pricefleet.com.br/">
+  <meta property="og:title" content="PriceFleet | Precificação inteligente para locadoras de veículos">
+  <meta property="og:description" content="Chega de precificar no escuro. O PriceFleet calcula, simula e valida o preço ideal de cada contrato de locação com base em valor residual e dados reais.">
+  <meta property="og:image" content="https://www.pricefleet.com.br/assets/og/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Tela de Projeção Residual do PriceFleet sobre fundo verde">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="assets/img/favicon.svg" type="image/svg+xml">
+
+  <!-- Nunito Sans 400/600/700 apenas. Em produção: auto-hospedar e fazer preload do woff2 700. -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="assets/css/styles.css">
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+  <script src="assets/js/main.js" defer></script>
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "PriceFleet",
+    "url": "https://www.pricefleet.com.br/",
+    "applicationCategory": "BusinessApplication",
+    "applicationSubCategory": "Precificação de contratos de locação de veículos",
+    "operatingSystem": "Web",
+    "inLanguage": "pt-BR",
+    "description": "Software SaaS que calcula, simula e valida o preço ideal de cada contrato de locação de veículos com base em valor residual, dados reais e regras de negócio da locadora.",
+    "featureList": [
+      "Precificação baseada em valor residual",
+      "Simulação financeira de ROI, ROA, Yield, margem, EBITDA e fluxo de caixa",
+      "Integrações nativas com FIPE, DataCar, Locavia e BlueFleet, e API para sistemas próprios",
+      "Simulação do impacto da Reforma Tributária (CBS e IBS) no preço",
+      "Parametrização avançada de regras de negócio",
+      "Controle de acesso por perfil (RBAC)",
+      "Governança de dados e rastreabilidade",
+      "Automação com regras de alçada e alertas de margem"
+    ],
+    "publisher": { "@type": "Organization", "name": "PriceFleet", "url": "https://www.pricefleet.com.br/" }
+  }
+  </script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Para qual tamanho de locadora o PriceFleet faz sentido?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "O PriceFleet foi desenhado para locadoras com frotas acima de 200 veículos, leves ou pesados. A partir desse volume, precificar em planilha passa a esconder prejuízos e a travar a área comercial. Se a sua frota está chegando a esse patamar, vale conversar."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "O PriceFleet substitui minhas planilhas de precificação?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. Cálculos, premissas e histórico que hoje ficam espalhados em planilhas passam a viver em um só lugar, com regras padronizadas e cada decisão registrada. Os cálculos são automáticos, o que elimina os erros manuais e a versão errada do arquivo."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Como o sistema calcula o valor residual dos veículos?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "O cálculo parte do valor de compra e de uma referência de mercado: FIPE, DataCar, modelo de depreciação, residual histórico ou a média entre elas. Depois aplica deflatores como franquia de km, utilização, desgaste, descontinuidade e facelift, além de um fator de ajuste definido pela sua locadora. O resultado é o valor de venda projetado para o fim do contrato."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Posso criar mais de uma proposta para o mesmo cliente?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. Você cria várias propostas para o mesmo cliente, com prazos e condições diferentes, e compara os cenários lado a lado. Simulações anteriores podem ser reaproveitadas, o que acelera a negociação."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "É possível simular fluxo de caixa e margem por contrato?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. Cada contrato tem simulação de fluxo de caixa e margem mês a mês, com ROI, ROA, Yield, EBITDA e resultado líquido. Você vê o impacto de cada condição antes de enviar a proposta."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Ele se integra com FIPE, DataCar, Locavia e BlueFleet?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. As integrações nativas com FIPE, DataCar, Locavia e BlueFleet levam os dados direto para o cálculo, sem copiar e colar. Para sistemas próprios ou legados, o PriceFleet oferece APIs de integração."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Consigo configurar as regras de negócio e as alçadas da minha empresa?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sim. Parâmetros, deflatores, margens mínimas e limites de alçada seguem a estrutura da sua locadora. O sistema encaminha cada proposta para quem precisa aprovar, com notificações e alertas, e não deixa passar concessões abaixo da margem mínima sem aprovação."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Como funcionam a implantação e o suporte?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Nosso time acompanha a locadora antes, durante e depois da implantação, com treinamento da equipe incluído. Depois, o suporte segue por chat, e-mail e telefone, com reuniões periódicas para acompanhar os resultados."
+        }
+      }
+    ]
+  }
+  </script>
+</head>
+<body>
+
+<!-- =========================================================
+     Sprite de ícones (traço 2px, currentColor)
+     ========================================================= -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+  <defs>
+    <linearGradient id="g-pf-cover" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F4F6F5"/><stop offset="1" stop-color="#E3F1E5"/>
+    </linearGradient>
+  </defs>
+  <!-- [cliente fornece SVG do logo] — marca provisória -->
+  <symbol id="logo-mark" viewBox="0 0 32 32">
+    <circle cx="16" cy="16" r="16" fill="#009844"/>
+    <path d="M11.5 23.5V9h6a4.6 4.6 0 0 1 0 9.2h-6" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle cx="22.6" cy="22.6" r="2.2" fill="#C5D031"/>
+  </symbol>
+  <symbol id="i-arrow-right" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-arrow-left" viewBox="0 0 24 24"><path d="M19 12H5M11 6l-6 6 6 6"/></symbol>
+  <symbol id="i-chevron-down" viewBox="0 0 24 24"><path d="m6 9 6 6 6-6"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M20 6 9 17l-5-5"/></symbol>
+  <symbol id="i-check-circle" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></symbol>
+  <symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+  <symbol id="i-x" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></symbol>
+  <symbol id="i-alert" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/><path d="M12 9v4M12 17h.01"/></symbol>
+  <symbol id="i-shield" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></symbol>
+  <symbol id="i-lock" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></symbol>
+  <symbol id="i-trend" viewBox="0 0 24 24"><path d="m3 17 6-6 4 4 8-8"/><path d="M14 7h7v7"/></symbol>
+  <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></symbol>
+  <symbol id="i-history" viewBox="0 0 24 24"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5M12 7v5l3 3"/></symbol>
+  <symbol id="i-users" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.9M16 3.1a4 4 0 0 1 0 7.8"/></symbol>
+  <symbol id="i-flow" viewBox="0 0 24 24"><rect x="3" y="3" width="6" height="6" rx="1.5"/><rect x="15" y="15" width="6" height="6" rx="1.5"/><path d="M6 9v3a3 3 0 0 0 3 3h6"/></symbol>
+  <symbol id="i-sheet" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M3 15h18M9 3v18"/></symbol>
+  <symbol id="i-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2-3 3-3 3M12 17h.01"/></symbol>
+  <symbol id="i-unlink" viewBox="0 0 24 24"><path d="m18.8 13.2 2.2-2.2a5 5 0 0 0-7-7l-2.2 2.2M5.2 10.8 3 13a5 5 0 0 0 7 7l2.2-2.2M8 2v3M2 8h3M16 22v-3M22 16h-3"/></symbol>
+  <symbol id="i-file" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6M8 13h8M8 17h5"/></symbol>
+  <symbol id="i-zap" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9l1-8z"/></symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.7 21a2 2 0 0 1-3.4 0"/></symbol>
+  <symbol id="i-database" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.7 3.6 3 8 3s8-1.3 8-3V5M4 12c0 1.7 3.6 3 8 3s8-1.3 8-3"/></symbol>
+  <symbol id="i-code" viewBox="0 0 24 24"><path d="m16 18 6-6-6-6M8 6l-6 6 6 6"/></symbol>
+  <symbol id="i-bar" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></symbol>
+  <symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></symbol>
+  <symbol id="i-layers" viewBox="0 0 24 24"><path d="m12 2 10 5-10 5L2 7z"/><path d="m2 17 10 5 10-5M2 12l10 5 10-5"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/></symbol>
+  <symbol id="i-kanban" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M9 3v18M15 3v12"/></symbol>
+  <symbol id="i-tag" viewBox="0 0 24 24"><path d="M20.6 13.4 13.4 20.6a2 2 0 0 1-2.8 0L2 12V2h10l8.6 8.6a2 2 0 0 1 0 2.8z"/><circle cx="7" cy="7" r="1.5"/></symbol>
+  <symbol id="i-folder" viewBox="0 0 24 24"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+  <symbol id="i-book" viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V2H6.5A2.5 2.5 0 0 0 4 4.5z"/><path d="M4 19.5V22h16"/></symbol>
+  <symbol id="i-target" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/></symbol>
+  <symbol id="i-sparkle" viewBox="0 0 24 24"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M6 6l2.5 2.5M15.5 15.5 18 18M6 18l2.5-2.5M15.5 8.5 18 6"/></symbol>
+  <symbol id="i-quote" viewBox="0 0 24 24"><path d="M3 21c3 0 7-1 7-8V5H3v8h4M14 21c3 0 7-1 7-8V5h-7v8h4"/></symbol>
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
+  <symbol id="i-percent" viewBox="0 0 24 24"><path d="M19 5 5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol>
+  <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M3 21l1.7-5A8.5 8.5 0 1 1 8 19.3z"/><path d="M9 9.5c.3 1.7 1.8 3.7 4 4.6l1.2-1.2 2 1-.4 1.5c-3.7.3-7.6-3.4-7.5-7.3l1.5-.4 1 2z"/></symbol>
+  <symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 22V4M4 4h13l-2 4 2 4H4"/></symbol>
+  <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.6c0-1.34-.02-3.06-1.86-3.06-1.87 0-2.15 1.46-2.15 2.96V21H9z"/></symbol>
+  <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor" stroke="none"/></symbol>
+</svg>
+
+<a class="skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+<!-- =========================================================
+     3.1 NAVBAR
+     ========================================================= -->
+<header class="nav" id="nav">
+  <div class="nav__progress" aria-hidden="true"><span></span></div>
+  <div class="nav__inner">
+    <a class="logo" href="#topo" aria-label="PriceFleet — página inicial" data-validar="Logo provisório: substituir pelo SVG oficial do PriceFleet">
+      <svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true"><use href="#logo-mark"/></svg>
+      <span class="logo__word" aria-hidden="true">Price<span>Fleet</span></span>
+    </a>
+
+    <nav class="nav__menu" aria-label="Principal">
+      <ul class="nav__links">
+        <li class="nav__has-mega" data-mega>
+          <button class="nav__link nav__mega-btn" type="button" aria-expanded="false" aria-controls="mega-produto" data-mega-btn>
+            Produto <svg class="icon icon--sm" aria-hidden="true"><use href="#i-chevron-down"/></svg>
+          </button>
+          <div class="mega" id="mega-produto" data-mega-panel>
+            <div class="mega__col">
+              <p class="mega__title">Precificação</p>
+              <ul>
+                <li><a class="mega__item" href="#f-01"><span class="mega__ic"><svg class="icon" aria-hidden="true"><use href="#i-target"/></svg></span><span><strong>Valor residual</strong><small>Preço que começa no fim do contrato.</small></span></a></li>
+                <li><a class="mega__item" href="#simulacao"><span class="mega__ic"><svg class="icon" aria-hidden="true"><use href="#i-trend"/></svg></span><span><strong>Simulação financeira</strong><small>ROI, ROA, Yield e EBITDA antes de fechar.</small></span></a></li>
+                <li><a class="mega__item" href="#reforma-tributaria"><span class="mega__ic"><svg class="icon" aria-hidden="true"><use href="#i-percent"/></svg></span><span><strong>Reforma Tributária</strong><small>Impacto de CBS e IBS no seu preço.</small></span></a></li>
+              </ul>
+            </div>
+            <div class="mega__col">
+              <p class="mega__title">Gestão</p>
+              <ul>
+                <li><a class="mega__item" href="#f-03"><span class="mega__ic"><svg class="icon" aria-hidden="true"><use href="#i-shield"/></svg></span><span><strong>Governança e acesso</strong><small>Cada número com origem e histórico.</small></span></a></li>
+                <li><a class="mega__item" href="#f-06"><span class="mega__ic"><svg class="icon" aria-hidden="true"><use href="#i-flow"/></svg></span><span><strong>Aprovações e alçadas</strong><small>Margem baixa vai para quem aprova.</small></span></a></li>
+                <li><a class="mega__item" href="#f-05"><span class="mega__ic"><svg class="icon" aria-hidden="true"><use href="#i-bar"/></svg></span><span><strong>Custos e portfólio</strong><small>Rentabilidade de cada veículo.</small></span></a></li>
+              </ul>
+            </div>
+            <div class="mega__feature">
+              <span class="eyebrow"><svg class="icon" aria-hidden="true"><use href="#i-sparkle"/></svg>Demonstração</span>
+              <p class="mega__feature-title">Veja o PriceFleet em ação</p>
+              <p class="mega__feature-text">Um contrato real da sua operação, calculado ao vivo.</p>
+              <button class="btn btn--primary" type="button" data-demo>
+                <span class="btn__inner"><span class="btn__roll"><span class="btn__label">Solicitar demonstração</span><span class="btn__label" aria-hidden="true">Solicitar demonstração</span></span></span>
+              </button>
+            </div>
+          </div>
+        </li>
+        <li><a class="nav__link" href="#como-funciona">Como funciona</a></li>
+        <li><a class="nav__link" href="#integracoes">Integrações</a></li>
+        <li><a class="nav__link" href="#conteudos">Conteúdos</a></li>
+        <li><a class="nav__link" href="#contato">Contato</a></li>
+      </ul>
+    </nav>
+
+    <div class="nav__actions">
+      <a class="nav__login link-u" href="#" data-validar="URL da área do cliente (Entrar)">Entrar</a>
+      <button class="btn btn--primary nav__cta" type="button" data-demo>
+        <span class="btn__inner"><span class="btn__roll"><span class="btn__label">Solicitar demonstração</span><span class="btn__label" aria-hidden="true">Solicitar demonstração</span></span></span>
+      </button>
+      <button class="burger" type="button" aria-expanded="false" aria-controls="menu-mobile" aria-label="Abrir menu" data-burger>
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Menu mobile (< 1024px) -->
+  <div class="mmenu" id="menu-mobile" data-mmenu>
+    <nav class="mmenu__nav" aria-label="Menu mobile">
+      <ul>
+        <li>
+          <button class="mmenu__link mmenu__toggle" type="button" aria-expanded="false" aria-controls="mmenu-produto" data-msub>
+            Produto <svg class="icon" aria-hidden="true"><use href="#i-chevron-down"/></svg>
+          </button>
+          <ul class="mmenu__sub" id="mmenu-produto">
+            <li><a href="#f-01">Valor residual</a></li>
+            <li><a href="#simulacao">Simulação financeira</a></li>
+            <li><a href="#reforma-tributaria">Reforma Tributária</a></li>
+            <li><a href="#f-03">Governança e acesso</a></li>
+            <li><a href="#f-06">Aprovações e alçadas</a></li>
+            <li><a href="#f-05">Custos e portfólio</a></li>
+          </ul>
+        </li>
+        <li><a class="mmenu__link" href="#como-funciona">Como funciona</a></li>
+        <li><a class="mmenu__link" href="#integracoes">Integrações</a></li>
+        <li><a class="mmenu__link" href="#conteudos">Conteúdos</a></li>
+        <li><a class="mmenu__link" href="#contato">Contato</a></li>
+        <li><a class="mmenu__link" href="#" data-validar="URL da área do cliente (Entrar)">Entrar</a></li>
+      </ul>
+    </nav>
+    <div class="mmenu__foot">
+      <button class="btn btn--primary btn--block" type="button" data-demo>
+        <span class="btn__inner"><span class="btn__roll"><span class="btn__label">Solicitar demonstração</span><span class="btn__label" aria-hidden="true">Solicitar demonstração</span></span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main id="conteudo">
+
+<!-- =========================================================
+     3.2 HERO
+     ========================================================= -->
+<section class="hero" id="topo" aria-labelledby="hero-title">
+  <div class="container hero__inner">
+    <a class="hero__badge" href="#reforma-tributaria" data-intro="badge">
+      <span class="hero__badge-tag">Novo</span>
+      <span>Simulação da Reforma Tributária (CBS/IBS)</span>
+      <svg class="icon icon--sm" aria-hidden="true"><use href="#i-arrow-right"/></svg>
+    </a>
+
+    <h1 class="hero__title t-display" id="hero-title">
+      <span class="line" data-intro="line" style="--d:100ms">Chega de precificar no escuro.</span>
+      <span class="line hero__title-accent" data-intro="line" style="--d:220ms">Preço não é tabela. É decisão.</span>
+    </h1>
+
+    <p class="hero__lead t-lead" data-intro="up" style="--d:350ms">
+      O PriceFleet calcula, simula e valida o preço ideal de cada contrato de locação com base em valor residual, dados reais e as regras do seu negócio. Mais margem, mais previsibilidade, menos risco.
+    </p>
+
+    <div class="hero__ctas" data-intro="up" style="--d:450ms">
+      <button class="btn btn--primary btn--lg" type="button" data-demo>
+        <span class="btn__inner"><span class="btn__roll"><span class="btn__label">Solicitar demonstração</span><span class="btn__label" aria-hidden="true">Solicitar demonstração</span></span></span>
+      </button>
+      <a class="btn btn--secondary btn--lg" href="#como-funciona">
+        <span class="btn__inner"><span class="btn__roll"><span class="btn__label">Ver como funciona</span><span class="btn__label" aria-hidden="true">Ver como funciona</span></span></span>
+      </a>
+    </div>
+    <p class="hero__trust" data-intro="up" style="--d:500ms">Para locadoras com frotas acima de 200 veículos · Leves e pesados</p>
+
+    <!-- Mockup: Projeção Residual (HTML/CSS) -->
+    <div class="hero__mock" data-intro="mock" style="--d:550ms">
+      <div class="mock" data-hero-mock role="img" aria-label="Prévia da tela de Projeção Residual do PriceFleet: assistente de seis etapas na etapa Projeção Residual, prazo de 36 meses, valores de compra, deflatores e valor final de venda projetado de R$ 65.494,54. Dados ilustrativos.">
+        <div class="mock__side">
+          <div class="mock__brand"><svg viewBox="0 0 32 32"><use href="#logo-mark"/></svg><span>PriceFleet</span></div>
+          <p class="mock__group">Home</p>
+          <ul class="mock__nav">
+            <li><svg class="icon"><use href="#i-home"/></svg><span>Início</span></li>
+            <li><svg class="icon"><use href="#i-kanban"/></svg><span>Kanban</span></li>
+          </ul>
+          <p class="mock__group">Preços</p>
+          <ul class="mock__nav">
+            <li class="is-active"><svg class="icon"><use href="#i-tag"/></svg><span>Solicitação de Preço</span></li>
+            <li><svg class="icon"><use href="#i-folder"/></svg><span>Portfólio</span></li>
+            <li><svg class="icon"><use href="#i-grid"/></svg><span>Categoria</span></li>
+            <li><svg class="icon"><use href="#i-sliders"/></svg><span>Parâmetros</span></li>
+          </ul>
+          <p class="mock__group">Gestão</p>
+          <ul class="mock__nav">
+            <li><svg class="icon"><use href="#i-bar"/></svg><span>Painéis</span></li>
+            <li><svg class="icon"><use href="#i-users"/></svg><span>Administração</span></li>
+            <li><svg class="icon"><use href="#i-book"/></svg><span>Tutoriais</span></li>
+          </ul>
+        </div>
+
+        <div class="mock__main">
+          <div class="mock__top">
+            <div class="mock__req">
+              <span class="mock__crumb">Solicitação de Preço</span>
+              <span class="mock__title">Nº 2026-0418</span>
+            </div>
+            <span class="status"><span class="status__dot"></span>Em Andamento</span>
+            <div class="mock__user"><span class="mock__user-name">Analista de Pricing</span><span class="avatar">AP</span></div>
+          </div>
+
+          <ol class="wizard" data-wizard>
+            <li class="is-done"><span class="wizard__dot"><span class="wizard__n">1</span><svg class="icon"><use href="#i-check"/></svg></span><span class="wizard__lbl">Dados Gerais</span></li>
+            <li class="is-done"><span class="wizard__dot"><span class="wizard__n">2</span><svg class="icon"><use href="#i-check"/></svg></span><span class="wizard__lbl">Contrato</span></li>
+            <li class="is-done"><span class="wizard__dot"><span class="wizard__n">3</span><svg class="icon"><use href="#i-check"/></svg></span><span class="wizard__lbl">Dados Veículo</span></li>
+            <li class="is-active"><span class="wizard__dot"><span class="wizard__n">4</span><svg class="icon"><use href="#i-check"/></svg></span><span class="wizard__lbl">Projeção Residual</span></li>
+            <li><span class="wizard__dot"><span class="wizard__n">5</span><svg class="icon"><use href="#i-check"/></svg></span><span class="wizard__lbl">Precificação</span></li>
+            <li><span class="wizard__dot"><span class="wizard__n">6</span><svg class="icon"><use href="#i-check"/></svg></span><span class="wizard__lbl">Revisão</span></li>
+          </ol>
+
+          <div class="mock__bar">
+            <span class="mock__h">Projeção Residual</span>
+            <div class="mock__period">
+              <span class="mock__period-lbl">Período (meses)</span>
+              <span class="ptabs"><span>12</span><span>18</span><span>24</span><span>30</span><span class="is-active">36</span></span>
+            </div>
+          </div>
+
+          <div class="mock__cols">
+            <div class="mcol mcol--compra">
+              <div class="mcol__h">Valores de Compra</div>
+              <div class="mfield"><span>Preço Público</span><b class="mval">R$ 98.590,00</b></div>
+              <div class="mfield"><span>Desconto Frotista</span><b class="mval">12,5% <i>· R$ 12.323,75</i></b></div>
+              <div class="mfield"><span>Valor de Compra</span><b class="mval mval--strong">R$ 86.266,25</b></div>
+              <div class="mfield"><span>Referência</span>
+                <div class="mradios">
+                  <span class="mradio"><i></i>DataCar</span><span class="mradio"><i></i>M. Depreciação</span><span class="mradio"><i></i>Residual</span><span class="mradio"><i></i>Fipe</span><span class="mradio is-on"><i></i>Média</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mcol mcol--defl">
+              <div class="mcol__h">Deflatores</div>
+              <div class="mrow"><span>Referência Inicial</span><b>78,4%</b></div>
+              <div class="mrow"><span>Franquia Km</span><b>−0,9%</b></div>
+              <div class="mrow"><span>Utilização</span><b>−0,6%</b></div>
+              <div class="mrow"><span>Desgaste</span><b>−0,5%</b></div>
+              <div class="mrow"><span>Descontinuidade</span><b>0,0%</b></div>
+              <div class="mrow"><span>Facelift</span><b>−0,5%</b></div>
+              <div class="mrow"><span>Fator de Ajuste</span><b>1,000</b></div>
+            </div>
+
+            <div class="mcol mcol--dep">
+              <div class="mcol__h">Depreciações <span class="mcol__tag">36 meses</span></div>
+              <svg class="mspark" viewBox="0 0 300 80" preserveAspectRatio="none">
+                <defs><linearGradient id="g-mspark" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#009844" stop-opacity=".22"/><stop offset="1" stop-color="#009844" stop-opacity="0"/></linearGradient></defs>
+                <path class="mspark__area" d="M0 8 C60 22 110 34 160 44 S250 58 300 62 L300 80 L0 80 Z" fill="url(#g-mspark)"/>
+                <path class="mspark__line" d="M0 8 C60 22 110 34 160 44 S250 58 300 62" pathLength="1"/>
+              </svg>
+              <div class="mrow"><span>Depreciação total</span><b>R$ 20.771,71</b></div>
+              <div class="mrow"><span>Depreciação mensal</span><b>R$ 576,99</b></div>
+              <div class="mrow"><span>Residual projetado</span><b>75,92%</b></div>
+              <div class="vfinal">
+                <span class="vfinal__lbl">Valor Final de Venda</span>
+                <strong class="vfinal__val" data-count="65494.54" data-decimals="2" data-prefix="R$ " data-count-manual>R$ 65.494,54</strong>
+                <span class="vfinal__sub">Projeção ao fim de 36 meses</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="mock__foot">
+            <span class="mbtn mbtn--danger">Cancelar</span>
+            <span class="mock__foot-spacer"></span>
+            <span class="mbtn mbtn--outline">Atualizar Parâmetros</span>
+            <span class="mbtn">← Anterior</span>
+            <span class="mbtn mbtn--solid">Próximo →</span>
+          </div>
+        </div>
+      </div>
+      <p class="hero__mock-note">Dados ilustrativos.</p>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     3.3 FAIXA DE LOGOS (marquee)
+     ========================================================= -->
+<section class="logos" aria-labelledby="logos-title">
+  <div class="container">
+    <h2 class="logos__title" id="logos-title" data-reveal="up">Empresas que confiam no PriceFleet</h2>
+  </div>
+  <!-- Clientes listados no site atual. [cliente fornece arquivos de logo; até lá, nomes em texto] -->
+  <div class="marquee marquee--logos" data-marquee data-cycle="50" data-validar="Arquivos de logo dos clientes (hoje exibidos como texto)">
+    <div class="marquee__track">
+      <ul class="marquee__group" aria-label="Clientes do PriceFleet">
+        <li class="wm">Stellantis</li>
+        <li class="wm">Mitsubishi</li>
+        <li class="wm">Barigui</li>
+        <li class="wm">UseCar</li>
+        <li class="wm">ViaMondo</li>
+        <li class="wm">Formula Zero</li>
+        <li class="wm">TopLine</li>
+        <li class="wm">Rodotop</li>
+        <li class="wm">Motory</li>
+        <li class="wm">Urban</li>
+        <li class="wm">Seta</li>
+        <li class="wm">Cider</li>
+        <li class="wm">Benali</li>
+        <li class="wm">Locavia</li>
+        <li class="wm">BlueFleet</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     3.4 PROBLEMA
+     ========================================================= -->
+<section class="section split" id="problema" aria-labelledby="problema-title">
+  <div class="container split__row">
+    <div class="split__text" data-reveal="left">
+      <span class="eyebrow"><svg class="icon" aria-hidden="true"><use href="#i-alert"/></svg>O problema</span>
+      <h2 class="t-h3" id="problema-title" data-reveal="lines">
+        <span class="line">Sua locadora pode estar</span>
+        <span class="line">perdendo dinheiro sem perceber.</span>
+      </h2>
+      <p>Planilhas sem controle, preços definidos no achismo e áreas que não conversam. O resultado aparece tarde: margens apertadas, descontos indevidos e contratos que dão prejuízo em silêncio.</p>
+      <ul class="pains">
+        <li><span class="pains__ic"><svg class="icon" aria-hidden="true"><use href="#i-sheet"/></svg></span><span><strong>Manual.</strong> Planilhas sem versão, sem trava e sem histórico.</span></li>
+        <li><span class="pains__ic"><svg class="icon" aria-hidden="true"><use href="#i-help"/></svg></span><span><strong>Empírica.</strong> Preço definido no achismo, não no dado.</span></li>
+        <li><span class="pains__ic"><svg class="icon" aria-hidden="true"><use href="#i-unlink"/></svg></span><span><strong>Desconectada.</strong> Comercial, financeiro e frota com números diferentes.</span></li>
+      </ul>
+      <a class="btn btn--secondary" href="#cta-final">
+        <span class="btn__inner"><span class="btn__roll"><span class="btn__label">Faça o diagnóstico</span><span class="btn__label" aria-hidden="true">Faça o diagnóstico</span></span></span>
+      </a>
+    </div>
+
+    <div class="split__media media-card" data-reveal="scale">
+      <div class="xform" data-xform data-loop role="img" aria-label="Ilustração: uma planilha com erros como #REF! e #DIV/0! e valores negativos é varrida por uma luz verde e se transforma em um card do PriceFleet com margem projetada de 18,4%, dentro da alçada.">
+        <ol class="xflow" aria-hidden="true">
+          <li data-xstep="0">Entrada</li>
+          <li class="xflow__sep"><svg class="icon icon--sm"><use href="#i-arrow-right"/></svg></li>
+          <li data-xstep="1">Transformação</li>
+          <li class="xflow__sep"><svg class="icon icon--sm"><use href="#i-arrow-right"/></svg></li>
+          <li data-xstep="2">Resultado</li>
+        </ol>
+        <div class="xstage" aria-hidden="true">
+          <div class="sheet">
+            <div class="sheet__fx"><b>fx</b><span>=SE(C4&gt;0;D4/C4;#REF!)</span></div>
+            <div class="sheet__grid">
+              <span class="hd" style="--c:0"></span><span class="hd" style="--c:1">A</span><span class="hd" style="--c:2">B</span><span class="hd" style="--c:3">C</span><span class="hd" style="--c:4">D</span>
+              <span class="rn" style="--c:0">1</span><span class="th" style="--c:1">Veículo</span><span class="th" style="--c:2">Compra</span><span class="th" style="--c:3">Residual</span><span class="th" style="--c:4">Margem</span>
+              <span class="rn" style="--c:0">2</span><span style="--c:1">Hatch 1.0</span><span style="--c:2">82.490</span><span class="err" style="--c:3">#N/D</span><span class="err" style="--c:4">#REF!</span>
+              <span class="rn" style="--c:0">3</span><span style="--c:1">Sedã 1.6</span><span style="--c:2">79.900</span><span style="--c:3">61.2??</span><span class="neg" style="--c:4">-2.140</span>
+              <span class="rn" style="--c:0">4</span><span style="--c:1">Picape 1.4</span><span style="--c:2">98.300</span><span style="--c:3">?</span><span class="err" style="--c:4">#DIV/0!</span>
+              <span class="rn" style="--c:0">5</span><span style="--c:1">SUV 1.0T</span><span style="--c:2">132.000</span><span style="--c:3">88.000</span><span style="--c:4">4,1%</span>
+              <span class="rn" style="--c:0">6</span><span style="--c:1">Caminhão 3/4</span><span style="--c:2">410.000</span><span class="err" style="--c:3">#REF!</span><span class="neg" style="--c:4">-8.900</span>
+              <span class="rn" style="--c:0">7</span><span style="--c:1">Total</span><span style="--c:2">=SOMA(B2:B6</span><span class="err" style="--c:3">#VALOR!</span><span class="err" style="--c:4">#REF!</span>
+              <span class="rn" style="--c:0">8</span><span style="--c:1">final_v3_ok</span><span style="--c:2"></span><span style="--c:3"></span><span class="neg" style="--c:4">???</span>
+            </div>
+          </div>
+          <span class="scan"></span>
+          <div class="xresult">
+            <div class="xcard">
+              <div class="xcard__head">
+                <svg class="xcard__logo" viewBox="0 0 32 32"><use href="#logo-mark"/></svg>
+                <span><b>Contrato Nº 0418</b><small>Picape 1.4 · 36 meses</small></span>
+                <span class="status"><span class="status__dot"></span>Aprovado</span>
+              </div>
+              <div class="xcard__rows">
+                <div><span>Valor de compra</span><b>R$ 86.266,25</b></div>
+                <div><span>Residual projetado</span><b>R$ 65.494,54</b></div>
+                <div><span>Receita do contrato</span><b>R$ 100.440,00</b></div>
+              </div>
+              <div class="xcard__margin">
+                <span>Margem projetada</span>
+                <b>18,4% <svg class="icon"><use href="#i-check-circle"/></svg></b>
+              </div>
+              <p class="xcard__note">Valor ilustrativo</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     ANTES E DEPOIS
+     ========================================================= -->
+<section class="section section--soft" id="antes-depois" aria-labelledby="ad-title">
+  <div class="container">
+    <header class="section-head">
+      <span class="eyebrow" data-reveal="up"><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg>Antes e depois</span>
+      <h2 class="t-h2" id="ad-title" data-reveal="lines">
+        <span class="line">De planilhas e achismo para</span>
+        <span class="line">decisões financeiras inteligentes.</span>
+      </h2>
+    </header>
+    <div class="compare" data-stagger>
+      <div class="compare__col compare__col--before" data-reveal="up">
+        <p class="compare__h"><span class="compare__tag">Antes</span>Planilhas e achismo</p>
+        <ul class="compare__list">
+            <li><span class="compare__ic"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></span>Preço montado em planilha manual</li>
+            <li><span class="compare__ic"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></span>Valor residual estimado no achismo</li>
+            <li><span class="compare__ic"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></span>Tabela FIPE copiada à mão</li>
+            <li><span class="compare__ic"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></span>Rentabilidade por veículo invisível</li>
+            <li><span class="compare__ic"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></span>Custos espalhados em vários arquivos</li>
+            <li><span class="compare__ic"><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></span>Relatórios montados à mão, sempre atrasados</li>
+        </ul>
+      </div>
+      <div class="compare__col compare__col--after" data-reveal="up">
+        <p class="compare__h"><span class="compare__tag">Depois</span>Com o PriceFleet</p>
+        <ul class="compare__list">
+            <li><span class="compare__ic"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>Preço calculado com dados reais</li>
+            <li><span class="compare__ic"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>Projeção residual com dados de mercado</li>
+            <li><span class="compare__ic"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>FIPE e DataCar atualizados automaticamente</li>
+            <li><span class="compare__ic"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>Rentabilidade de cada veículo e contrato</li>
+            <li><span class="compare__ic"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>Custos padronizados por categoria</li>
+            <li><span class="compare__ic"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>Dashboards e indicadores automáticos</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     3.5 COMO FUNCIONA
+     ========================================================= -->
+<section class="section" id="como-funciona" aria-labelledby="como-title">
+  <div class="container">
+    <header class="section-head">
+      <span class="eyebrow" data-reveal="up"><svg class="icon" aria-hidden="true"><use href="#i-zap"/></svg>Como funciona</span>
+      <h2 class="t-h2" id="como-title" data-reveal="lines">
+        <span class="line">Do pedido de preço à proposta</span>
+        <span class="line">aprovada, em um só fluxo.</span>
+      </h2>
+      <p class="section-head__text" data-reveal="up">Oito etapas em um só fluxo: da criação da proposta ao acompanhamento do contrato.</p>
+    </header>
+
+    <div class="steps" data-stagger>
+      <!-- Card 1 — Entrada -->
+      <article class="step" data-reveal="scale">
+        <div class="step__media" data-step-form data-loop>
+          <div class="mform" aria-hidden="true">
+            <div class="mform__f"><span>Cliente</span><b class="mform__v" data-type="Cliente Exemplo S.A.">Cliente Exemplo S.A.</b></div>
+            <div class="mform__row">
+              <div class="mform__f"><span>Prazo</span><b class="mform__v" data-type="36 meses">36 meses</b></div>
+              <div class="mform__f"><span>KM/mês</span><b class="mform__v" data-type="2.500 km">2.500 km</b></div>
+            </div>
+            <div class="mform__row">
+              <div class="mform__f"><span>Veículo</span><b class="mform__v" data-type="Picape 1.4 Flex">Picape 1.4 Flex</b></div>
+              <div class="mform__f"><span>Seguros</span><b class="mform__v" data-type="Casco + RCF">Casco + RCF</b></div>
+            </div>
+          </div>
+          <div class="mform__switch">
+            <span class="mform__opt" data-opt="0">Novo/0 KM</span>
+            <button class="switch" type="button" role="switch" aria-checked="false" aria-label="Veículo usado ou seminovo" data-step-switch>
+              <span class="switch__track"><span class="switch__thumb"></span></span>
+            </button>
+            <span class="mform__opt" data-opt="1">Usado/Seminovo</span>
+          </div>
+        </div>
+        <span class="step__k">Etapas 1–2 · Entrada</span>
+        <h3 class="step__title">Você cria a proposta.</h3>
+        <p class="t-small">Cliente, veículo, prazo, franquia e seguro. FIPE, DataCar e o histórico entram automaticamente.</p>
+        <a class="link-arrow" href="#f-02">Ver detalhes <svg class="icon icon--sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      </article>
+
+      <!-- Card 2 — Transformação -->
+      <article class="step" data-reveal="scale">
+        <div class="step__media" data-step-bars data-loop>
+          <div class="dbars" aria-hidden="true">
+            <div class="dbars__h"><span>Deflatores aplicados</span><b>36 meses</b></div>
+            <div class="dbar" style="--i:0;--v:78%"><span>Referência inicial</span><b>78,4%</b><i class="dbar__track"><i class="dbar__fill"></i></i></div>
+            <div class="dbar" style="--i:1;--v:46%"><span>Franquia Km</span><b>−0,9%</b><i class="dbar__track"><i class="dbar__fill"></i></i></div>
+            <div class="dbar" style="--i:2;--v:32%"><span>Utilização</span><b>−0,6%</b><i class="dbar__track"><i class="dbar__fill"></i></i></div>
+            <div class="dbar" style="--i:3;--v:26%"><span>Desgaste</span><b>−0,5%</b><i class="dbar__track"><i class="dbar__fill"></i></i></div>
+            <div class="dbar" style="--i:4;--v:24%"><span>Facelift</span><b>−0,5%</b><i class="dbar__track"><i class="dbar__fill"></i></i></div>
+            <div class="dbars__total"><span>Residual projetado</span><b>75,92%</b></div>
+          </div>
+        </div>
+        <span class="step__k">Etapas 3–5 · Cálculo</span>
+        <h3 class="step__title">O PriceFleet calcula e sugere o preço.</h3>
+        <p class="t-small">Custos, impostos, capital de giro, valor residual, ROI, Yield e EBITDA, com sugestão do preço ideal.</p>
+        <a class="link-arrow" href="#f-01">Ver detalhes <svg class="icon icon--sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      </article>
+
+      <!-- Card 3 — Resultado -->
+      <article class="step" data-reveal="scale">
+        <div class="step__media" data-step-result data-loop>
+          <div class="vres" aria-hidden="true">
+            <span class="vres__lbl">Valor Final de Venda</span>
+            <strong class="vres__val" data-count="65494.54" data-decimals="2" data-prefix="R$ " data-count-manual>R$ 65.494,54</strong>
+            <div class="vres__rows">
+              <div><span>Margem projetada</span><b>18,4%</b></div>
+              <div><span>Alçada</span><b>Gerente de Pricing</b></div>
+            </div>
+            <span class="vres__seal"><svg class="icon"><use href="#i-check-circle"/></svg>Aprovado</span>
+          </div>
+        </div>
+        <span class="step__k">Etapas 6–8 · Decisão</span>
+        <h3 class="step__title">Você aprova e acompanha.</h3>
+        <p class="t-small">Aprovação por alçada, integração com o ERP e monitoramento da rentabilidade durante todo o contrato.</p>
+        <a class="link-arrow" href="#f-06">Ver detalhes <svg class="icon icon--sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     3.6 SIMULAÇÃO
+     ========================================================= -->
+<section class="section split split--alt" id="simulacao" aria-labelledby="sim-title">
+  <div class="container split__row">
+    <div class="split__text" data-reveal="left">
+      <span class="eyebrow"><svg class="icon" aria-hidden="true"><use href="#i-trend"/></svg>Simulação financeira</span>
+      <h2 class="t-h3" id="sim-title" data-reveal="lines">
+        <span class="line">Simule o contrato inteiro</span>
+        <span class="line">antes de assinar.</span>
+      </h2>
+      <p>Compare cenários de 12 a 36 meses e veja ROI, ROA, Yield, margem, EBITDA e fluxo de caixa de cada contrato. Em segundos, não em dias de planilha.</p>
+      <button class="btn btn--primary" type="button" data-demo>
+        <span class="btn__inner"><span class="btn__roll"><span class="btn__label">Solicitar demonstração</span><span class="btn__label" aria-hidden="true">Solicitar demonstração</span></span></span>
+      </button>
+    </div>
+
+    <div class="split__media" data-reveal="scale">
+      <div class="simcard" data-sim>
+        <div class="simcard__head">
+          <div>
+            <p class="simcard__title">Resultado acumulado do contrato</p>
+            <p class="simcard__sub">Picape 1.4 · valor de compra R$ 86.266,25</p>
+          </div>
+          <div class="seg-wrap">
+            <span class="seg-wrap__lbl" id="sim-prazo">Prazo (meses)</span>
+            <div class="seg" role="tablist" aria-labelledby="sim-prazo" data-tabs>
+              <span class="seg__ind" aria-hidden="true"></span>
+              <button class="seg__tab" type="button" role="tab" id="tab-12" aria-selected="false" aria-controls="sim-panel" tabindex="-1" data-months="12">12</button>
+              <button class="seg__tab" type="button" role="tab" id="tab-18" aria-selected="false" aria-controls="sim-panel" tabindex="-1" data-months="18">18</button>
+              <button class="seg__tab" type="button" role="tab" id="tab-24" aria-selected="false" aria-controls="sim-panel" tabindex="-1" data-months="24">24</button>
+              <button class="seg__tab" type="button" role="tab" id="tab-30" aria-selected="false" aria-controls="sim-panel" tabindex="-1" data-months="30">30</button>
+              <button class="seg__tab" type="button" role="tab" id="tab-36" aria-selected="true" aria-controls="sim-panel" tabindex="0" data-months="36">36</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="simcard__panel" id="sim-panel" role="tabpanel" aria-labelledby="tab-36" tabindex="0">
+          <dl class="kpis">
+            <div class="kpi"><dt>ROI</dt><dd data-kpi="roi" data-decimals="1" data-suffix="%">21,4%</dd></div>
+            <div class="kpi"><dt>Margem</dt><dd data-kpi="margem" data-decimals="1" data-suffix="%">18,4%</dd></div>
+            <div class="kpi"><dt>EBITDA</dt><dd data-kpi="ebitda" data-decimals="0" data-prefix="R$ ">R$ 39.253</dd></div>
+            <div class="kpi"><dt>Payback</dt><dd data-kpi="payback" data-decimals="1" data-suffix=" meses">10,4 meses</dd></div>
+          </dl>
+          <p class="sr-only" aria-live="polite" data-sim-live></p>
+
+          <div class="chart" aria-hidden="true">
+            <div class="chart__y">
+              <span style="top:5.88%">R$ 20 mil</span>
+              <span style="top:35.29%">R$ 10 mil</span>
+              <span style="top:64.71%">R$ 0</span>
+              <span style="top:94.12%">−R$ 10 mil</span>
+            </div>
+            <div class="chart__plot" data-chart>
+              <i class="chart__gl" style="top:5.88%"></i><i class="chart__gl" style="top:35.29%"></i><i class="chart__gl" style="top:94.12%"></i>
+              <div class="chart__zero" style="top:64.71%"><span>Ponto de equilíbrio</span></div>
+              <div class="chart__draw">
+                <svg viewBox="0 0 1000 300" preserveAspectRatio="none">
+                  <defs>
+                    <linearGradient id="g-sim" x1="0" y1="0" x2="0" y2="1">
+                      <stop offset="0" stop-color="#009844" stop-opacity=".28"/>
+                      <stop offset="1" stop-color="#EAF6EA" stop-opacity="0"/>
+                    </linearGradient>
+                  </defs>
+                  <path class="chart__area" fill="url(#g-sim)" d=""/>
+                  <path class="chart__line" vector-effect="non-scaling-stroke" d=""/>
+                </svg>
+              </div>
+              <span class="chart__pt chart__pt--pay" data-pt-pay><em>Payback</em></span>
+              <span class="chart__pt chart__pt--end" data-pt-end><em data-pt-end-lbl>R$ 18,5 mil</em></span>
+            </div>
+            <div class="chart__x"><span>Mês 0</span><span data-x-mid>18</span><span data-x-end>36</span></div>
+          </div>
+          <p class="simcard__note"><span class="ph">[valores ilustrativos]</span> Modelo simplificado para demonstração.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     REFORMA TRIBUTÁRIA
+     ========================================================= -->
+<section class="section" id="reforma-tributaria" aria-labelledby="rt-title">
+  <div class="container">
+    <div class="rt" data-reveal="scale">
+      <div class="rt__text">
+        <span class="eyebrow"><svg class="icon" aria-hidden="true"><use href="#i-percent"/></svg>Reforma Tributária</span>
+        <h2 class="t-h3 rt__title" id="rt-title">A Reforma Tributária muda o preço certo de cada contrato.</h2>
+        <p>CBS e IBS alteram os créditos na compra, a tributação da locação e os impostos na venda do veículo. Sem adaptar a precificação, a margem cai mesmo com veículo, mensalidade, prazo e custos iguais.</p>
+        <ul class="rt__list">
+          <li><span class="rt__ic"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>Créditos de CBS e IBS na compra</li>
+          <li><span class="rt__ic"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>Tributação da locação no novo modelo</li>
+          <li><span class="rt__ic"><svg class="icon" aria-hidden="true"><use href="#i-check"/></svg></span>Impostos na desmobilização do veículo</li>
+        </ul>
+        <div class="rt__ctas">
+          <button class="btn btn--primary" type="button" data-demo="reforma">
+            <span class="btn__inner"><span class="btn__roll"><span class="btn__label">Simular o impacto na minha locadora</span><span class="btn__label" aria-hidden="true">Simular o impacto na minha locadora</span></span></span>
+          </button>
+          <a class="link-arrow" href="/blog/se-voce-nao-adequar-seu-processo-de-precificacao-a-reforma-tributaria-pode-perder-mais-de-3-3-p-p-de-rentabilidade">Ler o estudo <svg class="icon icon--sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+        </div>
+      </div>
+
+      <div class="rt__sim" data-rt>
+        <div class="rt__sim-head">
+          <span class="rt__sim-title">Margem do contrato</span>
+          <div class="rt__seg" role="group" aria-label="Cenário tributário">
+            <span class="rt__seg-ind" aria-hidden="true"></span>
+            <button type="button" aria-pressed="true" data-rt-state="atual">Regra atual</button>
+            <button type="button" aria-pressed="false" data-rt-state="reforma">Após a Reforma</button>
+          </div>
+        </div>
+        <p class="rt__value" aria-live="polite">
+          <span class="rt__num" data-rt-value data-decimals="1" data-suffix="%">18,4%</span>
+          <span class="rt__delta">−3,3 p.p.</span>
+        </p>
+        <div class="rt__meter" aria-hidden="true">
+          <i data-rt-fill></i>
+          <span class="rt__mark"><em>18,4%</em></span>
+        </div>
+        <div class="rt__scale" aria-hidden="true"><span>0%</span><span>10%</span><span>20%</span></div>
+        <p class="rt__copy">Mesmo veículo, mensalidade, prazo e custos. Sem adaptar a precificação, uma locadora pode perder <b>mais de 3,3 p.p. de rentabilidade</b>.</p>
+        <p class="rt__note">Fonte: simulação PriceFleet. Margens ilustrativas.</p>
+        <div class="rt__partner">
+          <span class="rt__partner-logo">Audit LocOne</span>
+          <span>Desenvolvido em parceria. Primeira solução acreditada para simular preços de locadoras na Reforma Tributária.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     3.7 DIFERENCIAIS — 1 destaque + 6 recursos
+     ========================================================= -->
+<section class="section section--soft" id="diferenciais" aria-labelledby="dif-title">
+  <div class="container">
+    <header class="section-head">
+      <span class="eyebrow" data-reveal="up"><svg class="icon" aria-hidden="true"><use href="#i-sparkle"/></svg>Diferenciais</span>
+      <h2 class="t-h2" id="dif-title" data-reveal="lines">
+        <span class="line">Feito para rentabilidade,</span>
+        <span class="line">não só para custo.</span>
+      </h2>
+      <p class="section-head__text" data-reveal="up">O que separa o PriceFleet de planilhas, ERPs genéricos e sistemas legados.</p>
+    </header>
+
+    <div class="fx" data-fx data-loop data-reveal="up">
+      <div class="fx__list" role="tablist" aria-orientation="vertical" aria-label="Diferenciais do PriceFleet">
+        <button class="fx__tab" type="button" role="tab" id="f-01" aria-selected="true" aria-controls="fx-p1" tabindex="0">
+          <span class="fx__ic"><svg class="icon" aria-hidden="true"><use href="#i-target"/></svg></span>
+          <span class="fx__title">Valor residual</span>
+          <span class="fx__desc"><span>O preço começa no fim do contrato: valor de venda projetado com FIPE, DataCar e deflatores.</span></span>
+          <span class="fx__bar" aria-hidden="true"><i></i></span>
+        </button>
+        <button class="fx__tab" type="button" role="tab" id="f-04" aria-selected="false" aria-controls="fx-p2" tabindex="-1">
+          <span class="fx__ic"><svg class="icon" aria-hidden="true"><use href="#i-trend"/></svg></span>
+          <span class="fx__title">Simulação completa</span>
+          <span class="fx__desc"><span>ROI, ROA, Yield, EBITDA e fluxo de caixa de cada contrato, antes de assinar.</span></span>
+          <span class="fx__bar" aria-hidden="true"><i></i></span>
+        </button>
+        <button class="fx__tab" type="button" role="tab" id="f-06" aria-selected="false" aria-controls="fx-p3" tabindex="-1">
+          <span class="fx__ic"><svg class="icon" aria-hidden="true"><use href="#i-bell"/></svg></span>
+          <span class="fx__title">Alçadas e alertas</span>
+          <span class="fx__desc"><span>Proposta abaixo da margem mínima só sai com aprovação de quem tem alçada.</span></span>
+          <span class="fx__bar" aria-hidden="true"><i></i></span>
+        </button>
+        <button class="fx__tab" type="button" role="tab" id="f-02" aria-selected="false" aria-controls="fx-p4" tabindex="-1">
+          <span class="fx__ic"><svg class="icon" aria-hidden="true"><use href="#i-zap"/></svg></span>
+          <span class="fx__title">Propostas mais rápidas</span>
+          <span class="fx__desc"><span>Até 90% menos tempo na aprovação de propostas.</span></span>
+          <span class="fx__bar" aria-hidden="true"><i></i></span>
+        </button>
+        <button class="fx__tab" type="button" role="tab" id="f-03" aria-selected="false" aria-controls="fx-p5" tabindex="-1">
+          <span class="fx__ic"><svg class="icon" aria-hidden="true"><use href="#i-lock"/></svg></span>
+          <span class="fx__title">Governança e acesso</span>
+          <span class="fx__desc"><span>Cada número com origem e histórico, e acesso controlado por perfil.</span></span>
+          <span class="fx__bar" aria-hidden="true"><i></i></span>
+        </button>
+        <button class="fx__tab" type="button" role="tab" id="f-05" aria-selected="false" aria-controls="fx-p6" tabindex="-1">
+          <span class="fx__ic"><svg class="icon" aria-hidden="true"><use href="#i-bar"/></svg></span>
+          <span class="fx__title">Custos e portfólio</span>
+          <span class="fx__desc"><span>Custos padronizados por categoria e o desempenho de cada veículo.</span></span>
+          <span class="fx__bar" aria-hidden="true"><i></i></span>
+        </button>
+        <button class="fx__tab" type="button" role="tab" id="f-07" aria-selected="false" aria-controls="fx-p7" tabindex="-1">
+          <span class="fx__ic"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg></span>
+          <span class="fx__title">Integrações e API</span>
+          <span class="fx__desc"><span>FIPE, DataCar, Locavia, BlueFleet e API para sistemas próprios.</span></span>
+          <span class="fx__bar" aria-hidden="true"><i></i></span>
+        </button>
+      </div>
+      <div class="fx__stage">
+        <div class="fx__panel" role="tabpanel" id="fx-p1" aria-labelledby="f-01" tabindex="0">
+          <div class="fxv fxv--orbit" aria-hidden="true">
+            <div class="orbit">
+              <div class="orbit__ring">
+                <div class="orbit__slot" style="--a:-90deg"><span class="orbit__pos"><span class="orbit__node">FIPE</span></span></div>
+                <div class="orbit__slot" style="--a:-18deg"><span class="orbit__pos"><span class="orbit__node">DataCar</span></span></div>
+                <div class="orbit__slot" style="--a:54deg"><span class="orbit__pos"><span class="orbit__node">M. Depreciação</span></span></div>
+                <div class="orbit__slot" style="--a:126deg"><span class="orbit__pos"><span class="orbit__node">Residual</span></span></div>
+                <div class="orbit__slot" style="--a:198deg"><span class="orbit__pos"><span class="orbit__node">Média</span></span></div>
+              </div>
+              <div class="orbit__core"><svg viewBox="0 0 32 32"><use href="#logo-mark"/></svg></div>
+            </div>
+            <div class="fxv__chip"><span>Valor final de venda</span><b>R$ 65.494,54</b></div>
+          </div>
+          <p class="fxv__cap">Referências de mercado combinadas na projeção do valor de venda.</p>
+        </div>
+        <div class="fx__panel" role="tabpanel" id="fx-p2" aria-labelledby="f-04" tabindex="0" hidden>
+          <div class="fxv fxv--kpis" aria-hidden="true">
+            <div class="fxv__card">
+              <div class="fxv__kpis">
+                <div><span>ROI</span><b>21,4%</b></div>
+                <div><span>Margem</span><b>18,4%</b></div>
+                <div><span>EBITDA</span><b>R$ 39.253</b></div>
+                <div><span>Payback</span><b>10,4 m</b></div>
+              </div>
+              <svg class="fxv__spark" viewBox="0 0 300 80" preserveAspectRatio="none">
+                <defs><linearGradient id="g-fx" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#009844" stop-opacity=".16"/><stop offset="1" stop-color="#009844" stop-opacity="0"/></linearGradient></defs>
+                <path d="M0 70 L30 66 L60 58 L90 54 L120 46 L150 40 L180 34 L210 26 L240 22 L270 14 L300 8 L300 80 L0 80 Z" fill="url(#g-fx)"/>
+                <path class="fxv__line" d="M0 70 L30 66 L60 58 L90 54 L120 46 L150 40 L180 34 L210 26 L240 22 L270 14 L300 8" pathLength="1"/>
+              </svg>
+            </div>
+          </div>
+          <p class="fxv__cap">Contrato de 36 meses. Valores ilustrativos.</p>
+        </div>
+        <div class="fx__panel" role="tabpanel" id="fx-p3" aria-labelledby="f-06" tabindex="0" hidden>
+          <div class="fxv fxv--flow" aria-hidden="true">
+            <div class="fxv__card fxv__step">
+              <div class="fxv__row"><b>Proposta Nº 0421</b><span class="fxv__pill fxv__pill--warn">Margem 11,2%</span></div>
+              <p>Abaixo da margem mínima de 14%</p>
+            </div>
+            <span class="fxv__arrow"></span>
+            <div class="fxv__card fxv__step">
+              <div class="fxv__row"><b>Aprovação por alçada</b><span class="status"><span class="status__dot"></span>Aguardando</span></div>
+              <p>Enviada para o Gerente de Pricing</p>
+            </div>
+          </div>
+          <p class="fxv__cap">O alerta dispara antes de a proposta sair. Exemplo ilustrativo.</p>
+        </div>
+        <div class="fx__panel" role="tabpanel" id="fx-p4" aria-labelledby="f-02" tabindex="0" hidden>
+          <div class="fxv fxv--speed" aria-hidden="true">
+            <p class="fxv__big"><small>até</small>90%</p>
+            <p class="fxv__sub">menos tempo na aprovação de propostas</p>
+            <div class="fxv__race">
+              <div><span>Fluxo manual</span><i class="fxv__slow"></i></div>
+              <div><span>Com PriceFleet</span><i class="fxv__fast"></i></div>
+            </div>
+          </div>
+          <p class="fxv__cap">Redução de até 90% no tempo de aprovação de propostas.</p>
+        </div>
+        <div class="fx__panel" role="tabpanel" id="fx-p5" aria-labelledby="f-03" tabindex="0" hidden>
+          <div class="fxv fxv--log" aria-hidden="true">
+            <div class="fxv__card">
+              <ul class="fxv__log">
+                <li><span class="fxv__av">CO</span><span><b>Comercial</b> criou a proposta Nº 0418</span><time>09:12</time></li>
+                <li><span class="fxv__av">PR</span><span><b>Pricing</b> ajustou o fator de residual</span><time>09:40</time></li>
+                <li><span class="fxv__av">DI</span><span><b>Diretoria</b> aprovou dentro da alçada</span><time>10:05</time></li>
+              </ul>
+              <div class="fxv__roles"><span>Acesso por perfil</span><i>Comercial</i><i>Pricing</i><i>Diretoria</i></div>
+            </div>
+          </div>
+          <p class="fxv__cap">Histórico completo de cada decisão. Exemplo ilustrativo.</p>
+        </div>
+        <div class="fx__panel" role="tabpanel" id="fx-p6" aria-labelledby="f-05" tabindex="0" hidden>
+          <div class="fxv fxv--table" aria-hidden="true">
+            <div class="fxv__card">
+              <div class="fxv__thead"><span>Categoria</span><span>Custo/mês</span><span>Margem</span></div>
+              <div class="fxv__tr"><span>Hatch</span><span>R$ 1.180</span><span><i style="--w:81%"></i>16,2%</span></div>
+              <div class="fxv__tr"><span>Sedã</span><span>R$ 1.420</span><span><i style="--w:92%"></i>18,4%</span></div>
+              <div class="fxv__tr"><span>Picape</span><span>R$ 1.690</span><span><i style="--w:100%"></i>21,0%</span></div>
+              <div class="fxv__tr fxv__tr--low"><span>SUV</span><span>R$ 1.950</span><span><i style="--w:64%"></i>12,8%</span></div>
+            </div>
+          </div>
+          <p class="fxv__cap">Rentabilidade por categoria e veículo. Valores ilustrativos.</p>
+        </div>
+        <div class="fx__panel" role="tabpanel" id="fx-p7" aria-labelledby="f-07" tabindex="0" hidden>
+          <div class="fxv fxv--hub" aria-hidden="true">
+            <svg class="fxv__wires" viewBox="0 0 400 240" preserveAspectRatio="none">
+              <path d="M110 60 C150 60 160 120 200 120"/><path d="M110 180 C150 180 160 120 200 120"/>
+              <path d="M290 40 C250 40 240 120 200 120"/><path d="M290 120 L200 120"/><path d="M290 200 C250 200 240 120 200 120"/>
+            </svg>
+            <div class="fxv__hub-col"><span>FIPE</span><span>DataCar</span></div>
+            <div class="fxv__hub-core"><svg viewBox="0 0 32 32"><use href="#logo-mark"/></svg></div>
+            <div class="fxv__hub-col"><span>Locavia</span><span>BlueFleet</span><span><svg class="icon"><use href="#i-code"/></svg>API</span></div>
+          </div>
+          <p class="fxv__cap">Integrações nativas e API para sistemas próprios ou legados.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     3.8 INTEGRAÇÕES
+     ========================================================= -->
+<section class="section" id="integracoes" aria-labelledby="int-title">
+  <div class="container int">
+    <div class="int__text" data-reveal="left">
+      <span class="eyebrow"><svg class="icon" aria-hidden="true"><use href="#i-database"/></svg>Integrações</span>
+      <h2 class="t-h3" id="int-title" data-reveal="lines">
+        <span class="line">Dados de mercado</span>
+        <span class="line">direto no cálculo.</span>
+      </h2>
+      <p>Integrações nativas com FIPE, DataCar, Locavia e BlueFleet, e API para sistemas próprios ou legados. Sem copiar e colar, sem tabela desatualizada.</p>
+      <button class="btn btn--primary" type="button" data-demo="integracoes">
+        <span class="btn__inner"><span class="btn__roll"><span class="btn__label">Falar sobre integrações</span><span class="btn__label" aria-hidden="true">Falar sobre integrações</span></span></span>
+      </button>
+    </div>
+
+    <div class="int__media" data-reveal="scale">
+      <div class="tiles">
+        <div class="tiles__col marquee" data-marquee data-axis="y" data-cycle="30">
+          <div class="marquee__track"><ul class="marquee__group">
+            <li class="tile tile--brand" data-tip="FIPE"><span class="tile__wm">FIPE</span></li>
+            <li class="tile" data-tip="API"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg><span class="sr-only">API</span></li>
+            <li class="tile tile--brand" data-tip="BlueFleet"><span class="tile__wm">BlueFleet</span></li>
+            <li class="tile tile--brand" data-tip="DataCar"><span class="tile__wm">DataCar</span></li>
+          </ul></div>
+        </div>
+        <div class="tiles__col marquee" data-marquee data-axis="y" data-cycle="30" data-dir="reverse">
+          <div class="marquee__track"><ul class="marquee__group">
+            <li class="tile tile--brand" data-tip="DataCar"><span class="tile__wm">DataCar</span></li>
+            <li class="tile tile--brand" data-tip="Locavia"><span class="tile__wm">Locavia</span></li>
+            <li class="tile tile--brand" data-tip="FIPE"><span class="tile__wm">FIPE</span></li>
+            <li class="tile" data-tip="API"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg><span class="sr-only">API</span></li>
+          </ul></div>
+        </div>
+        <div class="tiles__col marquee" data-marquee data-axis="y" data-cycle="30">
+          <div class="marquee__track"><ul class="marquee__group">
+            <li class="tile tile--brand" data-tip="Locavia"><span class="tile__wm">Locavia</span></li>
+            <li class="tile tile--brand" data-tip="BlueFleet"><span class="tile__wm">BlueFleet</span></li>
+            <li class="tile" data-tip="API"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg><span class="sr-only">API</span></li>
+            <li class="tile tile--brand" data-tip="FIPE"><span class="tile__wm">FIPE</span></li>
+          </ul></div>
+        </div>
+        <div class="tiles__col marquee" data-marquee data-axis="y" data-cycle="30" data-dir="reverse">
+          <div class="marquee__track"><ul class="marquee__group">
+            <li class="tile tile--brand" data-tip="BlueFleet"><span class="tile__wm">BlueFleet</span></li>
+            <li class="tile tile--brand" data-tip="FIPE"><span class="tile__wm">FIPE</span></li>
+            <li class="tile tile--brand" data-tip="DataCar"><span class="tile__wm">DataCar</span></li>
+            <li class="tile tile--brand" data-tip="Locavia"><span class="tile__wm">Locavia</span></li>
+          </ul></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     3.9 RESULTADOS (prova social)
+     ========================================================= -->
+<section class="section section--soft" id="resultados" aria-labelledby="res-title">
+  <div class="container">
+    <header class="section-head">
+      <span class="eyebrow" data-reveal="up"><svg class="icon" aria-hidden="true"><use href="#i-flag"/></svg>Resultados</span>
+      <h2 class="t-h2" id="res-title" data-reveal="lines">
+        <span class="line">Locadoras que pararam</span>
+        <span class="line">de precificar no escuro.</span>
+      </h2>
+    </header>
+
+    <ul class="stats" data-stagger>
+      <li class="stat" data-reveal="up">
+        <span class="t-stat"><small class="stat__pre">até</small><span data-count="90" data-decimals="0" data-suffix="%">90%</span></span>
+        <span class="stat__lbl">menos tempo na aprovação de propostas</span>
+      </li>
+      <li class="stat" data-reveal="up">
+        <span class="t-stat">Dezenas</span>
+        <span class="stat__lbl">de locadoras usando o PriceFleet</span>
+      </li>
+      <li class="stat" data-reveal="up">
+        <span class="t-stat"><span data-count="4" data-decimals="0">4</span></span>
+        <span class="stat__lbl">integrações nativas, além de API</span>
+      </li>
+    </ul>
+
+    <!-- [cliente fornece 3 depoimentos reais: nome, cargo, empresa, logo, foto autorizada e 1 resultado numérico] -->
+    <div class="carousel" role="region" aria-roledescription="carrossel" aria-label="Depoimentos de clientes" data-carousel data-reveal="scale">
+      <div class="carousel__viewport" data-car-viewport>
+        <ul class="carousel__track">
+          <li class="slide" role="group" aria-roledescription="slide" aria-label="1 de 3">
+            <article class="tcard">
+              <div class="tcard__media" aria-hidden="true"><span class="tcard__avatar">?</span><span class="ph">[cliente fornece: foto autorizada]</span></div>
+              <div class="tcard__body">
+                <span class="tcard__quote" aria-hidden="true">“</span>
+                <p class="tcard__text">Depoimento em breve.</p>
+                <span class="ph">[cliente fornece: citação real, com autorização]</span>
+                <div class="tcard__meta">
+                  <div><p class="tcard__name">[Nome do cliente]</p><p class="tcard__role">[Cargo] · [Empresa]</p></div>
+                  <span class="tcard__logo">[logo]</span>
+                </div>
+                <span class="chip">[validar: +X p.p. de margem]</span>
+              </div>
+            </article>
+          </li>
+          <li class="slide" role="group" aria-roledescription="slide" aria-label="2 de 3">
+            <article class="tcard">
+              <div class="tcard__media" aria-hidden="true"><span class="tcard__avatar">?</span><span class="ph">[cliente fornece: foto autorizada]</span></div>
+              <div class="tcard__body">
+                <span class="tcard__quote" aria-hidden="true">“</span>
+                <p class="tcard__text">Depoimento em breve.</p>
+                <span class="ph">[cliente fornece: citação real, com autorização]</span>
+                <div class="tcard__meta">
+                  <div><p class="tcard__name">[Nome do cliente]</p><p class="tcard__role">[Cargo] · [Empresa]</p></div>
+                  <span class="tcard__logo">[logo]</span>
+                </div>
+                <span class="chip">[validar: X% de redução no tempo de proposta]</span>
+              </div>
+            </article>
+          </li>
+          <li class="slide" role="group" aria-roledescription="slide" aria-label="3 de 3">
+            <article class="tcard">
+              <div class="tcard__media" aria-hidden="true"><span class="tcard__avatar">?</span><span class="ph">[cliente fornece: foto autorizada]</span></div>
+              <div class="tcard__body">
+                <span class="tcard__quote" aria-hidden="true">“</span>
+                <p class="tcard__text">Depoimento em breve.</p>
+                <span class="ph">[cliente fornece: citação real, com autorização]</span>
+                <div class="tcard__meta">
+                  <div><p class="tcard__name">[Nome do cliente]</p><p class="tcard__role">[Cargo] · [Empresa]</p></div>
+                  <span class="tcard__logo">[logo]</span>
+                </div>
+                <span class="chip">[validar: R$ X em descontos indevidos evitados]</span>
+              </div>
+            </article>
+          </li>
+        </ul>
+      </div>
+      <div class="carousel__nav">
+        <button class="carousel__arrow" type="button" aria-label="Depoimento anterior" data-car-prev><svg class="icon" aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
+        <div class="carousel__dots" data-car-dots></div>
+        <button class="carousel__arrow" type="button" aria-label="Próximo depoimento" data-car-next><svg class="icon" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     3.10 CONTEÚDOS
+     ========================================================= -->
+<section class="section" id="conteudos" aria-labelledby="blog-title">
+  <div class="container">
+    <header class="section-head section-head--row">
+      <div class="section-head__main">
+        <span class="eyebrow" data-reveal="up"><svg class="icon" aria-hidden="true"><use href="#i-book"/></svg>Conteúdos</span>
+        <h2 class="t-h2" id="blog-title" data-reveal="lines">
+          <span class="line">Precificação de frota,</span>
+          <span class="line">sem achismo.</span>
+        </h2>
+      </div>
+      <a class="link-arrow" href="/blog" data-reveal="up">Ver todos os conteúdos <svg class="icon icon--sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></a>
+    </header>
+
+    <div class="posts" data-stagger>
+      <article class="post" data-reveal="scale">
+        <a class="post__link" href="/blog/se-voce-nao-adequar-seu-processo-de-precificacao-a-reforma-tributaria-pode-perder-mais-de-3-3-p-p-de-rentabilidade">
+          <div class="post__cover" aria-hidden="true">
+            <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="240" fill="url(#g-pf-cover)"/>
+              <g stroke="#009844" stroke-opacity=".18"><path d="M0 60h400M0 120h400M0 180h400"/></g>
+              <rect x="90" y="70" width="70" height="140" rx="12" fill="#009844" fill-opacity=".9"/>
+              <rect x="240" y="100" width="70" height="110" rx="12" fill="#009844" fill-opacity=".35"/>
+              <path d="M240 70h70" stroke="#009844" stroke-width="3" stroke-dasharray="6 6"/>
+              <path d="M275 74v20" stroke="#004422" stroke-width="3"/><path d="m268 88 7 8 7-8" fill="none" stroke="#004422" stroke-width="3"/>
+            </svg>
+          </div>
+          <div class="post__body">
+            <p class="post__meta">Reforma Tributária · <time datetime="2026-09-30">30 set 2026</time></p>
+            <h3 class="post__title">Se você não adequar seu processo de precificação à Reforma Tributária, pode perder mais de 3,3 p.p. de rentabilidade</h3>
+            <p class="t-small">A simulação mostra a margem caindo mesmo com veículo, mensalidade, prazo e custos iguais.</p>
+          </div>
+        </a>
+      </article>
+
+      <article class="post" data-reveal="scale">
+        <a class="post__link" href="/blog/reforma-tributaria-nas-locadoras-o-desafio-nao-e-apenas-pagar-o-imposto-certo-e-cobrar-o-preco-certo">
+          <div class="post__cover" aria-hidden="true">
+            <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="240" fill="url(#g-pf-cover)"/>
+              <circle cx="200" cy="120" r="70" fill="#009844" fill-opacity=".14"/>
+              <path d="M235 85 165 155" stroke="#009844" stroke-width="10" stroke-linecap="round"/>
+              <circle cx="168" cy="90" r="18" fill="none" stroke="#009844" stroke-width="10"/>
+              <circle cx="232" cy="150" r="18" fill="#C5D031" stroke="#004422" stroke-width="4"/>
+            </svg>
+          </div>
+          <div class="post__body">
+            <p class="post__meta">Reforma Tributária · <time datetime="2026-09-15">15 set 2026</time></p>
+            <h3 class="post__title">Reforma Tributária nas locadoras: o desafio não é apenas pagar o imposto certo. É cobrar o preço certo.</h3>
+            <p class="t-small">Como transformar as novas regras em custos, margens e preços que preservem o retorno do contrato.</p>
+          </div>
+        </a>
+      </article>
+
+      <article class="post" data-reveal="scale">
+        <a class="post__link" href="/blog/pricefleet-e-audit-locone-saem-na-frente-e-lancam-a-primeira-solucao-acreditada-para-simulacao-de-precos-para-locadora-de-veiculos-na-reforma-tributaria">
+          <div class="post__cover" aria-hidden="true">
+            <svg viewBox="0 0 400 240" preserveAspectRatio="xMidYMid slice">
+              <rect width="400" height="240" fill="url(#g-pf-cover)"/>
+              <circle cx="165" cy="120" r="62" fill="#009844" fill-opacity=".85"/>
+              <circle cx="235" cy="120" r="62" fill="#C5D031" fill-opacity=".9" stroke="#004422" stroke-width="3"/>
+              <path d="m214 120 14 14 26-28" fill="none" stroke="#004422" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div class="post__body">
+            <p class="post__meta">Reforma Tributária · <time datetime="2026-06-11">11 jun 2026</time></p>
+            <h3 class="post__title">PriceFleet e Audit LocOne lançam a primeira solução acreditada para simulação de preços na Reforma Tributária</h3>
+            <p class="t-small">A parceria que antecipa o impacto de CBS e IBS na formação de preços das locadoras.</p>
+          </div>
+        </a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- =========================================================
+     3.11 FAQ
+     ========================================================= -->
+<section class="section" id="faq" aria-labelledby="faq-title">
+  <div class="container">
+    <header class="section-head">
+      <span class="eyebrow" data-reveal="up"><svg class="icon" aria-hidden="true"><use href="#i-help"/></svg>Perguntas frequentes</span>
+      <h2 class="t-h2" id="faq-title" data-reveal="lines">
+        <span class="line">O que as locadoras</span>
+        <span class="line">perguntam antes de começar.</span>
+      </h2>
+    </header>
+
+    <div class="faq" data-faq data-stagger>
+      <div class="faq__item" data-reveal="up">
+        <h3 class="faq__q"><button type="button" id="faq-b1" aria-expanded="false" aria-controls="faq-p1">Para qual tamanho de locadora o PriceFleet faz sentido?<span class="faq__ic" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></button></h3>
+        <div class="faq__panel" id="faq-p1" role="region" aria-labelledby="faq-b1"><div><p>O PriceFleet foi desenhado para locadoras com frotas acima de 200 veículos, leves ou pesados. A partir desse volume, precificar em planilha passa a esconder prejuízos e a travar a área comercial. Se a sua frota está chegando a esse patamar, vale conversar.</p></div></div>
+      </div>
+      <div class="faq__item" data-reveal="up">
+        <h3 class="faq__q"><button type="button" id="faq-b2" aria-expanded="false" aria-controls="faq-p2">O PriceFleet substitui minhas planilhas de precificação?<span class="faq__ic" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></button></h3>
+        <div class="faq__panel" id="faq-p2" role="region" aria-labelledby="faq-b2"><div><p>Sim. Cálculos, premissas e histórico que hoje ficam espalhados em planilhas passam a viver em um só lugar, com regras padronizadas e cada decisão registrada. Os cálculos são automáticos, o que elimina os erros manuais e a versão errada do arquivo.</p></div></div>
+      </div>
+      <div class="faq__item" data-reveal="up">
+        <h3 class="faq__q"><button type="button" id="faq-b3" aria-expanded="false" aria-controls="faq-p3">Como o sistema calcula o valor residual dos veículos?<span class="faq__ic" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></button></h3>
+        <div class="faq__panel" id="faq-p3" role="region" aria-labelledby="faq-b3"><div><p>O cálculo parte do valor de compra e de uma referência de mercado: FIPE, DataCar, modelo de depreciação, residual histórico ou a média entre elas. Depois aplica deflatores como franquia de km, utilização, desgaste, descontinuidade e facelift, além de um fator de ajuste definido pela sua locadora. O resultado é o valor de venda projetado para o fim do contrato.</p></div></div>
+      </div>
+      <div class="faq__item" data-reveal="up">
+        <h3 class="faq__q"><button type="button" id="faq-b4" aria-expanded="false" aria-controls="faq-p4">Posso criar mais de uma proposta para o mesmo cliente?<span class="faq__ic" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></button></h3>
+        <div class="faq__panel" id="faq-p4" role="region" aria-labelledby="faq-b4"><div><p>Sim. Você cria várias propostas para o mesmo cliente, com prazos e condições diferentes, e compara os cenários lado a lado. Simulações anteriores podem ser reaproveitadas, o que acelera a negociação.</p></div></div>
+      </div>
+      <div class="faq__item" data-reveal="up">
+        <h3 class="faq__q"><button type="button" id="faq-b5" aria-expanded="false" aria-controls="faq-p5">É possível simular fluxo de caixa e margem por contrato?<span class="faq__ic" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></button></h3>
+        <div class="faq__panel" id="faq-p5" role="region" aria-labelledby="faq-b5"><div><p>Sim. Cada contrato tem simulação de fluxo de caixa e margem mês a mês, com ROI, ROA, Yield, EBITDA e resultado líquido. Você vê o impacto de cada condição antes de enviar a proposta.</p></div></div>
+      </div>
+      <div class="faq__item" data-reveal="up">
+        <h3 class="faq__q"><button type="button" id="faq-b6" aria-expanded="false" aria-controls="faq-p6">Ele se integra com FIPE, DataCar, Locavia e BlueFleet?<span class="faq__ic" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></button></h3>
+        <div class="faq__panel" id="faq-p6" role="region" aria-labelledby="faq-b6"><div><p>Sim. As integrações nativas com FIPE, DataCar, Locavia e BlueFleet levam os dados direto para o cálculo, sem copiar e colar. Para sistemas próprios ou legados, o PriceFleet oferece APIs de integração.</p></div></div>
+      </div>
+      <div class="faq__item" data-reveal="up">
+        <h3 class="faq__q"><button type="button" id="faq-b7" aria-expanded="false" aria-controls="faq-p7">Consigo configurar as regras de negócio e as alçadas da minha empresa?<span class="faq__ic" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></button></h3>
+        <div class="faq__panel" id="faq-p7" role="region" aria-labelledby="faq-b7"><div><p>Sim. Parâmetros, deflatores, margens mínimas e limites de alçada seguem a estrutura da sua locadora. O sistema encaminha cada proposta para quem precisa aprovar, com notificações e alertas, e não deixa passar concessões abaixo da margem mínima sem aprovação.</p></div></div>
+      </div>
+      <div class="faq__item" data-reveal="up">
+        <h3 class="faq__q"><button type="button" id="faq-b8" aria-expanded="false" aria-controls="faq-p8">Como funcionam a implantação e o suporte?<span class="faq__ic" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></button></h3>
+        <div class="faq__panel" id="faq-p8" role="region" aria-labelledby="faq-b8"><div><p>Nosso time acompanha a locadora antes, durante e depois da implantação, com treinamento da equipe incluído. Depois, o suporte segue por chat, e-mail e telefone, com reuniões periódicas para acompanhar os resultados.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- =========================================================
+     3.12 CTA FINAL + RODAPÉ
+     ========================================================= -->
+<div class="final">
+  <div class="container">
+    <section class="final__cta" id="cta-final" aria-labelledby="cta-title">
+      <h2 class="t-h2 final__title" id="cta-title" data-reveal="lines">
+        <span class="line">Transforme sua frota em uma</span>
+        <span class="line">máquina de rentabilidade.</span>
+      </h2>
+      <p class="final__text" data-reveal="up">Veja o PriceFleet calculando um contrato real da sua operação, em uma demonstração feita para a sua locadora.</p>
+      <div class="final__ctas" data-reveal="up">
+        <button class="btn btn--primary btn--lg" type="button" data-demo>
+          <span class="btn__inner"><span class="btn__roll"><span class="btn__label">Solicitar demonstração</span><span class="btn__label" aria-hidden="true">Solicitar demonstração</span></span></span>
+        </button>
+        <a class="btn btn--secondary btn--lg" href="https://wa.me/5531996054442?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20PriceFleet!" target="_blank" rel="noopener"><span class="btn__inner"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-whatsapp"/></svg><span class="btn__roll"><span class="btn__label">Falar com um especialista</span><span class="btn__label" aria-hidden="true">Falar com um especialista</span></span></span></a>
+      </div>
+      <ul class="final__gains" data-reveal="up" aria-label="O que você ganha">
+        <li><svg class="icon icon--sm" aria-hidden="true"><use href="#i-check"/></svg>Demonstração personalizada</li>
+        <li><svg class="icon icon--sm" aria-hidden="true"><use href="#i-check"/></svg>Análise gratuita da sua operação</li>
+        <li><svg class="icon icon--sm" aria-hidden="true"><use href="#i-check"/></svg>Proposta comercial sob medida</li>
+        <li><svg class="icon icon--sm" aria-hidden="true"><use href="#i-check"/></svg>Suporte na implantação</li>
+        <li><svg class="icon icon--sm" aria-hidden="true"><use href="#i-check"/></svg>Treinamento da equipe incluído</li>
+      </ul>
+    </section>
+
+    <footer class="foot-wrap">
+    <div class="foot">
+      <div class="foot__brand">
+        <a class="logo" href="#topo" aria-label="PriceFleet — página inicial">
+          <svg class="logo__mark" viewBox="0 0 32 32" aria-hidden="true"><use href="#logo-mark"/></svg>
+          <span class="logo__word" aria-hidden="true">Price<span>Fleet</span></span>
+        </a>
+        <p>De planilhas e achismo para decisões financeiras inteligentes.</p>
+        <ul class="foot__social">
+          <li><a class="foot__social-li" href="https://www.linkedin.com/company/pricefleet/" target="_blank" rel="noopener" aria-label="PriceFleet no LinkedIn"><svg class="icon" aria-hidden="true"><use href="#i-linkedin"/></svg></a></li>
+          <li><a href="https://www.instagram.com/pricefleet/" target="_blank" rel="noopener" aria-label="PriceFleet no Instagram"><svg class="icon" aria-hidden="true"><use href="#i-instagram"/></svg></a></li>
+        </ul>
+      </div>
+
+      <nav class="foot__col" aria-labelledby="foot-prod">
+        <p class="foot__h" id="foot-prod">Produto</p>
+        <ul>
+          <li><a class="link-u" href="#f-01">Valor residual</a></li>
+          <li><a class="link-u" href="#simulacao">Simulação</a></li>
+          <li><a class="link-u" href="#f-03">Governança</a></li>
+          <li><a class="link-u" href="#integracoes">Integrações</a></li>
+          <li><a class="link-u" href="#f-06">Automação</a></li>
+        </ul>
+      </nav>
+
+      <nav class="foot__col" aria-labelledby="foot-emp">
+        <p class="foot__h" id="foot-emp">Empresa</p>
+        <ul>
+          <li><a class="link-u" href="/sobre" data-validar="URL da página Sobre">Sobre</a></li>
+          <li><a class="link-u" href="/blog">Blog</a></li>
+          <li><a class="link-u" href="#contato">Contato</a></li>
+          <li><button class="link-u" type="button" data-demo>Solicitar demonstração</button></li>
+        </ul>
+      </nav>
+
+      <div class="foot__col" id="contato">
+        <p class="foot__h">Contato</p>
+        <ul class="foot__contact">
+          <li><svg class="icon icon--sm" aria-hidden="true"><use href="#i-mail"/></svg><a class="link-u" href="mailto:comercial@pricefleet.com.br">comercial@pricefleet.com.br</a></li>
+          <li><svg class="icon icon--sm" aria-hidden="true"><use href="#i-phone"/></svg><a class="link-u" href="tel:+5531996054442">+55 (31) 99605-4442</a></li>
+          <li><svg class="icon icon--sm" aria-hidden="true"><use href="#i-whatsapp"/></svg><a class="link-u" href="https://wa.me/5531996054442?text=Ol%C3%A1!%20Vim%20pelo%20site%20e%20gostaria%20de%20saber%20mais%20sobre%20o%20PriceFleet!" target="_blank" rel="noopener">Falar no WhatsApp</a></li>
+          <li><svg class="icon icon--sm" aria-hidden="true"><use href="#i-pin"/></svg><a class="link-u" href="https://www.google.com/maps/search/?api=1&amp;query=Rumo+Solu%C3%A7%C3%B5es+Lagoa+Santa+MG" target="_blank" rel="noopener">Rumo Soluções · Lagoa Santa, MG</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="foot__legal">
+      <p>© 2026 PriceFleet. Todos os direitos reservados. Desenvolvido por Rumo Soluções.</p>
+      <ul>
+        <li><a class="link-u" href="/politica-de-privacidade" data-validar="URL da Política de Privacidade">Política de Privacidade</a></li>
+        <li><a class="link-u" href="/termos-de-uso" data-validar="URL dos Termos de Uso">Termos de Uso</a></li>
+        <li><a class="link-u" href="/lgpd" data-validar="URL da página LGPD">LGPD</a></li>
+      </ul>
+    </div>
+    </footer>
+  </div>
+</div>
+
+<!-- =========================================================
+     MODAL — Solicitar demonstração (destino de todos os CTAs)
+     ========================================================= -->
+<dialog class="modal" id="demo-modal" aria-labelledby="demo-title" data-modal>
+  <div class="modal__box">
+    <button class="modal__close" type="button" aria-label="Fechar" data-modal-close><svg class="icon" aria-hidden="true"><use href="#i-x"/></svg></button>
+
+    <div class="modal__view" data-view="form">
+      <span class="eyebrow"><svg class="icon" aria-hidden="true"><use href="#i-calendar"/></svg>Demonstração</span>
+      <h2 class="modal__title" id="demo-title">Veja o PriceFleet calculando um contrato da sua operação.</h2>
+      <p class="modal__text">Preencha os dados e nossa equipe agenda a demonstração com você. Inclui análise gratuita da sua operação.</p>
+
+      <!-- [validar: endpoint de envio] — defina data-endpoint para enviar via POST (JSON) -->
+      <form class="form" novalidate data-demo-form data-endpoint="">
+        <div class="field">
+          <label for="f-nome">Nome</label>
+          <input id="f-nome" name="nome" type="text" autocomplete="name" required aria-describedby="e-nome">
+          <p class="field__err" id="e-nome"></p>
+        </div>
+        <div class="field">
+          <label for="f-email">E-mail corporativo</label>
+          <input id="f-email" name="email" type="email" autocomplete="email" required aria-describedby="e-email">
+          <p class="field__err" id="e-email"></p>
+        </div>
+        <div class="field">
+          <label for="f-tel">Telefone/WhatsApp</label>
+          <input id="f-tel" name="telefone" type="tel" inputmode="tel" autocomplete="tel-national" placeholder="(11) 90000-0000" required aria-describedby="e-tel">
+          <p class="field__err" id="e-tel"></p>
+        </div>
+        <div class="field">
+          <label for="f-empresa">Empresa</label>
+          <input id="f-empresa" name="empresa" type="text" autocomplete="organization" required aria-describedby="e-empresa">
+          <p class="field__err" id="e-empresa"></p>
+        </div>
+        <div class="field">
+          <label for="f-cargo">Cargo</label>
+          <select id="f-cargo" name="cargo" required aria-describedby="e-cargo">
+            <option value="">Selecione</option>
+            <option>CEO / Diretor(a)</option>
+            <option>Gestor(a) de Frota</option>
+            <option>Gerente de Pricing</option>
+            <option>Financeiro / Controladoria</option>
+            <option>Comercial</option>
+          </select>
+          <p class="field__err" id="e-cargo"></p>
+        </div>
+        <div class="field">
+          <label for="f-frota">Tamanho da frota</label>
+          <select id="f-frota" name="frota" required aria-describedby="e-frota">
+            <option value="">Selecione</option>
+            <option>200–500</option>
+            <option>500–1.000</option>
+            <option>1.000–5.000</option>
+            <option>5.000+</option>
+          </select>
+          <p class="field__err" id="e-frota"></p>
+        </div>
+        <div class="field field--full">
+          <label for="f-origem">Como conheceu o PriceFleet? <span class="field__opt">(opcional)</span></label>
+          <select id="f-origem" name="origem">
+            <option value="">Selecione</option>
+            <option>Google</option>
+            <option>Instagram</option>
+            <option>Facebook</option>
+            <option>LinkedIn</option>
+            <option>Evento</option>
+            <option>Indicação</option>
+            <option>Outro</option>
+          </select>
+        </div>
+        <div class="field field--full">
+          <label for="f-msg">Mensagem <span class="field__opt">(opcional)</span></label>
+          <textarea id="f-msg" name="mensagem" rows="3" maxlength="2000" placeholder="Conte um pouco sobre a sua operação"></textarea>
+        </div>
+        <div class="field field--full field--check">
+          <input id="f-lgpd" name="consentimento" type="checkbox" required aria-describedby="e-lgpd">
+          <label for="f-lgpd">Autorizo o PriceFleet a usar meus dados para entrar em contato sobre a demonstração, conforme a <a class="link-u" href="/politica-de-privacidade" target="_blank" rel="noopener">Política de Privacidade</a>.</label>
+          <p class="field__err" id="e-lgpd"></p>
+        </div>
+        <div class="field--full form__actions">
+          <button class="btn btn--primary btn--lg btn--block" type="submit" data-submit>
+            <span class="btn__inner">
+              <span class="btn__spinner" aria-hidden="true"></span>
+              <span class="btn__roll"><span class="btn__label">Agendar demonstração</span><span class="btn__label" aria-hidden="true">Agendar demonstração</span></span>
+            </span>
+          </button>
+          <p class="form__status" role="alert" data-form-status></p>
+        </div>
+      </form>
+    </div>
+
+    <div class="modal__view modal__success" data-view="success" hidden>
+      <span class="modal__success-ic"><svg class="icon" aria-hidden="true"><use href="#i-check-circle"/></svg></span>
+      <h2 class="modal__title" tabindex="-1" data-success-title>Pedido recebido.</h2>
+      <p class="modal__text" data-validar="SLA de retorno (1 dia útil)">Recebemos seu pedido. Nossa equipe entra em contato em até 1 dia útil.</p>
+      <button class="btn btn--secondary" type="button" data-modal-close>
+        <span class="btn__inner"><span class="btn__roll"><span class="btn__label">Fechar</span><span class="btn__label" aria-hidden="true">Fechar</span></span></span>
+      </button>
+    </div>
+  </div>
+</dialog>
+
+<!-- =========================================================
+     CONSENTIMENTO DE COOKIES (LGPD) — rastreamento só após "Aceitar"
+     ========================================================= -->
+<div class="consent" role="region" aria-label="Aviso de cookies" data-consent hidden>
+  <p>Usamos cookies para medir o desempenho do site e das campanhas. Você escolhe. <a class="link-u" href="/politica-de-privacidade">Política de Privacidade</a></p>
+  <div class="consent__actions">
+    <button class="btn btn--secondary" type="button" data-consent-choice="no"><span class="btn__inner">Recusar</span></button>
+    <button class="btn btn--primary" type="button" data-consent-choice="yes"><span class="btn__inner">Aceitar</span></button>
+  </div>
+</div>
+
+<!-- =========================================================
+     FERRAMENTA DE REVISÃO (remover antes de publicar)
+     Destaca todos os [placeholders] e itens a validar.
+     ========================================================= -->
+<div class="review" data-review-tool>
+  <div class="review__panel" id="review-panel" hidden>
+    <p class="review__h">Pontos a validar</p>
+    <ol class="review__list" data-review-list></ol>
+  </div>
+  <button class="review__btn" type="button" aria-expanded="false" aria-controls="review-panel" data-review-btn>
+    <svg class="icon icon--sm" aria-hidden="true"><use href="#i-flag"/></svg>
+    <span>Pontos a validar (<span data-review-count>0</span>)</span>
+  </button>
+</div>
+
+</body>
+</html>
