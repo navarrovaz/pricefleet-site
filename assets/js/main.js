@@ -20,6 +20,8 @@
     return formatters[d].format(v);
   };
   const debounce = (fn, ms) => { let t; return (...a) => { clearTimeout(t); t = setTimeout(() => fn(...a), ms); }; };
+  // Cada módulo roda isolado: um erro numa seção não derruba as demais.
+  const safe = (fn) => { try { fn(); } catch (err) { console.error(`[PriceFleet] ${fn.name}:`, err); } };
   let lenis = null;
 
   /* ---------- Visibilidade: pausa loops fora da viewport / aba oculta ---------- */
@@ -50,6 +52,7 @@
 
   /* ---------- Contadores (formato pt-BR) ---------- */
   function renderNum(el, v) {
+    el._cur = v;
     const d = +(el.dataset.decimals || 0);
     el.textContent = (el.dataset.prefix || '') + fmt(v, d) + (el.dataset.suffix || '');
   }
@@ -89,7 +92,7 @@
   $$('[data-reveal]').forEach((el) => revealIO.observe(el));
 
   /* ---------- Hero: entrada + mockup ---------- */
-  (function hero() {
+  safe(function hero() {
     const mock = $('[data-hero-mock]');
     if (!mock) return;
     const steps = $$('[data-wizard] li', mock);
@@ -110,7 +113,7 @@
       spark.style.transition = 'stroke-dashoffset 1400ms cubic-bezier(.22,1,.36,1)';
       spark.style.strokeDashoffset = '0';
     }, 1750); // 550ms de entrada do mockup + 1200ms
-  })();
+  });
 
   /* ---------- Navbar: fundo ao rolar + progresso ---------- */
   const nav = $('#nav');
@@ -245,7 +248,7 @@
   }
 
   /* ---------- 3.4 Problema: planilha → PriceFleet ---------- */
-  (function problem() {
+  safe(function problem() {
     const xf = $('[data-xform]');
     if (!xf) return;
     const steps = $$('[data-xstep]', xf);
@@ -260,10 +263,10 @@
       setStep(2);
       xf.classList.add('is-done');
     }, 0.35);
-  })();
+  });
 
   /* ---------- 3.5 Como funciona ---------- */
-  (function steps() {
+  safe(function steps() {
     // Card 1 — digitação + toggle Novo/Seminovo (funcional)
     const card1 = $('[data-step-form]');
     if (card1) {
@@ -325,16 +328,16 @@
         });
       }
     }
-  })();
+  });
 
-  /* ---------- 3.6 Simulação: prazo de 6 a 60 meses + gráfico + KPIs ---------- */
-  (function simulation() {
+  /* ---------- 3.6 Simulação: contratos de 6 a 60 meses ---------- */
+  safe(function simulation() {
     const sim = $('[data-sim]');
     if (!sim) return;
     // Modelo ilustrativo: resultado acumulado R(t) = -setup + a·t - b·t²
     // price = mensalidade · a = resultado operacional mensal · res = valor residual no fim do prazo
     const M = {
-      compra: 86266.25, setup: 9000, b: 4, ymin: -12000, ymax: 32000,
+      compra: 86266.25, setup: 9000, b: 4, ymin: -12000, ymax: 32000, min: 6, max: 60, step: 6,
       p: {
         6: { price: 4200, a: 1700, res: 80200 },
         12: { price: 3390, a: 1020, res: 76100 },
@@ -366,16 +369,23 @@
     const yFrac = (v) => (M.ymax - v) / (M.ymax - M.ymin);
     const points = (n) => Array.from({ length: SAMPLES + 1 }, (_, i) => yFrac(R(M.p[n], (n * i) / SAMPLES)) * 300);
     const toPath = (ys) => ys.map((y, i) => `${i ? 'L' : 'M'}${((i / SAMPLES) * 1000).toFixed(1)} ${y.toFixed(2)}`).join(' ');
+    const clampN = (n) => Math.min(M.max, Math.max(M.min, Math.round(n / M.step) * M.step));
 
     const line = $('.chart__line', sim);
     const area = $('.chart__area', sim);
     const plot = $('[data-chart]', sim);
     const range = $('[data-range]', sim);
     const term = $('[data-term]', sim);
+    const steps = $$('[data-term-step]', sim);
+    const picks = $$('[data-term-pick]', sim);
+    const play = $('[data-term-play]', sim);
+    const playLbl = $('[data-term-play-lbl]', sim);
+    const playIc = $('.range__play-ic use', sim);
     const kpi = Object.fromEntries($$('[data-kpi]', sim).map((el) => [el.dataset.kpi, el]));
     const ptPay = $('[data-pt-pay]', sim);
     const ptEnd = $('[data-pt-end]', sim);
     const ptEndLbl = $('[data-pt-end-lbl]', sim);
+    const hover = $('[data-chart-hover]', sim);
     const xMid = $('[data-x-mid]', sim);
     const xEnd = $('[data-x-end]', sim);
     const live = $('[data-sim-live]', sim);
@@ -383,41 +393,58 @@
     let current = +range.value;
     let ys = points(current);
     let anim = 0;
+    let playTimer = 0;
 
     const draw = (arr) => {
       const d = toPath(arr);
       line.setAttribute('d', d);
       area.setAttribute('d', `${d} L1000 300 L0 300 Z`);
     };
+    // Rótulos dos marcadores ficam sempre dentro do gráfico
+    const edge = (el, frac) => {
+      el.classList.toggle('is-edge-r', frac > 0.72);
+      el.classList.toggle('is-edge-l', frac < 0.18);
+    };
     const markers = (n) => {
       const m = metrics(n);
-      ptPay.style.left = `${(m.equilibrio / n) * 100}%`;
+      const fx = m.equilibrio / n;
+      ptPay.style.left = `${fx * 100}%`;
       ptPay.style.top = `${yFrac(0) * 100}%`;
       $('em', ptPay).textContent = `Equilíbrio · mês ${fmt(m.equilibrio, 1)}`;
+      edge(ptPay, fx);
       ptEnd.style.left = '100%';
       ptEnd.style.top = `${yFrac(m.r) * 100}%`;
       ptEndLbl.textContent = `R$ ${fmt(m.r / 1000, 1)} mil`;
       xMid.textContent = String(n / 2);
       xEnd.textContent = `${n} meses`;
     };
-    const syncRange = (n) => {
-      range.style.setProperty('--p', `${((n - 6) / 54) * 100}%`);
+    const syncControls = (n) => {
+      range.value = String(n);
+      range.style.setProperty('--p', `${((n - M.min) / (M.max - M.min)) * 100}%`);
       range.setAttribute('aria-valuetext', `${n} meses`);
       term.textContent = `${n} meses`;
+      picks.forEach((b) => {
+        const on = +b.dataset.termPick === n;
+        b.setAttribute('aria-pressed', String(on));
+      });
+      steps[0].disabled = n <= M.min;
+      steps[1].disabled = n >= M.max;
     };
 
     draw(ys);
     markers(current);
-    syncRange(current);
+    syncControls(current);
 
     function setPeriod(n) {
-      syncRange(n);
+      n = clampN(n);
+      syncControls(n);
       if (n === current) return;
-      const prev = metrics(current);
       const next = metrics(n);
-      Object.keys(kpi).forEach((k) => countTo(kpi[k], next[k], { from: prev[k], dur: 700 }));
+      const prev = metrics(current);
+      // conta a partir do valor que está na tela (sem saltos ao trocar rápido)
+      Object.keys(kpi).forEach((k) => countTo(kpi[k], next[k], { from: kpi[k]._cur ?? prev[k], dur: 650 }));
       markers(n);
-      live.textContent = `Prazo de ${n} meses: ROI ${fmt(next.roi, 1)}%, margem ${fmt(next.margem, 1)}%, EBITDA R$ ${fmt(next.ebitda, 0)}, ROA de ${fmt(next.roa, 1)}% ao ano. Valores ilustrativos.`;
+      live.textContent = `Contrato de ${n} meses: ROI ${fmt(next.roi, 1)}%, margem ${fmt(next.margem, 1)}%, EBITDA R$ ${fmt(next.ebitda, 0)}, ROA de ${fmt(next.roa, 1)}% ao ano. Valores ilustrativos.`;
 
       const from = ys.slice();
       const to = points(n);
@@ -426,7 +453,7 @@
       else {
         const t0 = performance.now();
         const tick = (now) => {
-          const p = Math.min(1, (now - t0) / 600);
+          const p = Math.min(1, (now - t0) / 550);
           const e = easeInOut(p);
           ys = from.map((y, i) => y + (to[i] - y) * e);
           draw(ys);
@@ -436,7 +463,48 @@
       }
       current = n;
     }
-    range.addEventListener('input', () => setPeriod(+range.value));
+
+    // Percorrer automaticamente de 6 a 60 meses
+    function stopPlay() {
+      clearInterval(playTimer);
+      playTimer = 0;
+      play.setAttribute('aria-pressed', 'false');
+      playLbl.textContent = 'Percorrer de 6 a 60 meses';
+      playIc.setAttribute('href', '#i-play');
+    }
+    function startPlay() {
+      if (current >= M.max) setPeriod(M.min);
+      play.setAttribute('aria-pressed', 'true');
+      playLbl.textContent = 'Pausar';
+      playIc.setAttribute('href', '#i-pause');
+      playTimer = setInterval(() => {
+        if (current >= M.max) { stopPlay(); return; }
+        setPeriod(current + M.step);
+      }, 1000);
+    }
+    play.addEventListener('click', () => (playTimer ? stopPlay() : startPlay()));
+
+    const userSet = (n) => { stopPlay(); setPeriod(n); };
+    range.addEventListener('input', () => userSet(+range.value));
+    steps.forEach((b) => b.addEventListener('click', () => userSet(current + +b.dataset.termStep)));
+    picks.forEach((b) => b.addEventListener('click', () => userSet(+b.dataset.termPick)));
+
+    // Leitura do gráfico: mês e resultado acumulado sob o cursor
+    const hoverDot = $('i', hover);
+    const hoverLbl = $('em', hover);
+    plot.addEventListener('pointermove', (e) => {
+      const r = plot.getBoundingClientRect();
+      const frac = Math.min(1, Math.max(0, (e.clientX - r.left) / r.width));
+      const month = Math.round(frac * current);
+      const f = month / current;
+      const v = R(M.p[current], month);
+      hover.style.left = `${f * 100}%`;
+      hoverDot.style.top = `${yFrac(v) * 100}%`;
+      hoverLbl.textContent = `Mês ${month} · ${v < 0 ? '−' : ''}R$ ${fmt(Math.abs(v) / 1000, 1)} mil`;
+      edge(hover, f);
+      hover.classList.add('is-on');
+    });
+    plot.addEventListener('pointerleave', () => hover.classList.remove('is-on'));
 
     // Entrada: desenha a linha (clip) e conta os KPIs
     const m0 = metrics(current);
@@ -445,10 +513,10 @@
       plot.classList.add('is-drawn');
       Object.keys(kpi).forEach((k) => countTo(kpi[k], m0[k], { dur: 1200 }));
     }, 0.3);
-  })();
+  });
 
   /* ---------- 3.9 Carrossel de depoimentos ---------- */
-  (function carousel() {
+  safe(function carousel() {
     const car = $('[data-carousel]');
     if (!car) return;
     const vp = $('[data-car-viewport]', car);
@@ -487,10 +555,10 @@
     });
     addEventListener('resize', debounce(() => go(idx), 150));
     update();
-  })();
+  });
 
   /* ---------- 3.11 FAQ (um aberto por vez) ---------- */
-  (function faq() {
+  safe(function faq() {
     const items = $$('.faq__item');
     items.forEach((item) => {
       const btn = $('button', item);
@@ -503,7 +571,7 @@
         });
       });
     });
-  })();
+  });
 
   /* ---------- Modal: Solicitar demonstração ---------- */
   const modal = $('[data-modal]');
@@ -665,7 +733,7 @@
   }
 
   /* ---------- Diferenciais: explorador com troca automática ---------- */
-  (function explorer() {
+  safe(function explorer() {
     const fx = $('[data-fx]');
     if (!fx) return;
     const tabs = $$('[role="tab"]', fx);
@@ -712,10 +780,10 @@
       if (k > -1) select(k, { user: true });
     });
     onceInView(fx, () => select(0), 0.3);
-  })();
+  });
 
   /* ---------- Reforma Tributária: alternância de cenário ---------- */
-  (function reforma() {
+  safe(function reforma() {
     const sim = $('[data-rt]');
     if (!sim) return;
     const btns = $$('[data-rt-state]', sim);
@@ -748,10 +816,10 @@
     btns.forEach((b) => b.addEventListener('click', () => { touched = true; set(b.dataset.rtState); }));
     // ao entrar na tela, mostra a queda da margem uma vez
     onceInView(sim, async () => { await sleep(reduced() ? 0 : 1000); if (!touched) set('reforma'); }, 0.5);
-  })();
+  });
 
   /* ---------- Antes e depois: hover numa linha destaca o par ---------- */
-  (function compare() {
+  safe(function compare() {
     const cmp = $('.compare');
     if (!cmp) return;
     $$('.compare__list', cmp).forEach((list) => $$('li', list).forEach((li, i) => { li.dataset.i = i; }));
@@ -762,13 +830,14 @@
       if (li) $$(`li[data-i="${li.dataset.i}"]`, cmp).forEach((x) => x.classList.add('is-hl'));
     });
     cmp.addEventListener('pointerleave', clear);
-  })();
+  });
 
   /* ---------- Microinterações de cursor (só mouse, sem movimento reduzido) ---------- */
   const finePointer = matchMedia('(hover: hover) and (pointer: fine)').matches;
   if (finePointer && !reduced()) {
     // Spotlight nos cards
-    $$('.step__media, .compare__col, .stat, .post__link, .simcard, .fx__stage, .rt__sim, .tcard').forEach((el) => el.classList.add('spot'));
+    // (painéis interativos — simulação, Reforma e Diferenciais — ficam sem spotlight para não manchar a leitura)
+    $$('.step__media, .compare__col, .stat, .post__link, .tcard').forEach((el) => el.classList.add('spot'));
     let spotRaf = 0;
     document.addEventListener('pointermove', (e) => {
       const el = e.target.closest && e.target.closest('.spot');
@@ -810,7 +879,7 @@
   }
 
   /* ---------- Mockup do hero: inclinação que se desfaz com a rolagem ---------- */
-  (function heroTilt() {
+  safe(function heroTilt() {
     const el = $('.hero__mock .mock');
     if (!el || reduced()) return;
     let raf = 0;
@@ -823,10 +892,10 @@
     addEventListener('scroll', () => { if (!raf) raf = requestAnimationFrame(update); }, { passive: true });
     addEventListener('resize', update);
     update();
-  })();
+  });
 
   /* ---------- Navbar: destaca a seção visível ---------- */
-  (function currentSection() {
+  safe(function currentSection() {
     const map = [['diferenciais', megaBtn], ['como-funciona'], ['integracoes'], ['conteudos'], ['contato']]
       .map(([id, link]) => [document.getElementById(id), link || $(`.nav__link[href="#${id}"]`)])
       .filter(([sec, link]) => sec && link);
@@ -840,7 +909,7 @@
       });
     }, { rootMargin: '-45% 0px -50% 0px' });
     map.forEach(([sec]) => io.observe(sec));
-  })();
+  });
 
   /* ---------- Consentimento de cookies (LGPD) + rastreamento ---------- */
   // [validar] Preencher no deploy de produção. Vazio = nada é carregado.
@@ -878,7 +947,7 @@
       fbq('track', 'PageView');
     }
   }
-  (function consent() {
+  safe(function consent() {
     const bar = $('[data-consent]');
     if (!bar) return;
     let choice = null;
@@ -892,10 +961,10 @@
       bar.hidden = true;
       if (accepted) loadTracking();
     }));
-  })();
+  });
 
   /* ---------- Ferramenta de revisão (remover antes de publicar) ---------- */
-  (function review() {
+  safe(function review() {
     const tool = $('[data-review-tool]');
     if (!tool) return;
     const btn = $('[data-review-btn]', tool);
@@ -932,5 +1001,5 @@
       panel.hidden = !open;
       root.classList.toggle('is-review', open);
     });
-  })();
+  });
 })();

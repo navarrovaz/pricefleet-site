@@ -30,9 +30,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap">
-  <link rel="stylesheet" href="assets/css/styles.css">
+  <link rel="stylesheet" href="assets/css/styles.css?v=20261027c">
   <script>document.documentElement.classList.replace('no-js', 'js');</script>
-  <script src="assets/js/main.js" defer></script>
+  <script src="assets/js/main.js?v=20261027c" defer></script>
 
   <script type="application/ld+json">
   {
@@ -188,6 +188,8 @@
   <symbol id="i-pin" viewBox="0 0 24 24"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></symbol>
   <symbol id="i-percent" viewBox="0 0 24 24"><path d="M19 5 5 19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></symbol>
   <symbol id="i-whatsapp" viewBox="0 0 24 24"><path d="M3 21l1.7-5A8.5 8.5 0 1 1 8 19.3z"/><path d="M9 9.5c.3 1.7 1.8 3.7 4 4.6l1.2-1.2 2 1-.4 1.5c-3.7.3-7.6-3.4-7.5-7.3l1.5-.4 1 2z"/></symbol>
+  <symbol id="i-play" viewBox="0 0 24 24"><path d="M7 4.5v15l12.5-7.5z" fill="currentColor" stroke="none"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path d="M8 5v14M16 5v14"/></symbol>
   <symbol id="i-flag" viewBox="0 0 24 24"><path d="M4 22V4M4 4h13l-2 4 2 4H4"/></symbol>
   <symbol id="i-linkedin" viewBox="0 0 24 24"><path fill="currentColor" stroke="none" d="M4.98 3.5a2.5 2.5 0 1 1 0 5 2.5 2.5 0 0 1 0-5zM3 9h4v12H3zM9 9h3.8v1.7h.05c.53-1 1.83-2.05 3.77-2.05 4.03 0 4.78 2.65 4.78 6.1V21h-4v-5.6c0-1.34-.02-3.06-1.86-3.06-1.87 0-2.15 1.46-2.15 2.96V21H9z"/></symbol>
   <symbol id="i-instagram" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".9" fill="currentColor" stroke="none"/></symbol>
@@ -679,21 +681,35 @@
             <p class="simcard__title">Resultado acumulado do contrato</p>
             <p class="simcard__sub">Picape 1.4 · valor de compra R$ 86.266,25</p>
           </div>
-          <p class="simcard__term"><span>Prazo</span><b data-term>36 meses</b></p>
+          <div class="simcard__term">
+            <span class="simcard__term-lbl">Prazo do contrato</span>
+            <div class="term-nav">
+              <button class="term-nav__btn" type="button" aria-label="Prazo anterior" data-term-step="-6"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-arrow-left"/></svg></button>
+              <b class="term-nav__val" data-term aria-live="polite">36 meses</b>
+              <button class="term-nav__btn" type="button" aria-label="Próximo prazo" data-term-step="6"><svg class="icon icon--sm" aria-hidden="true"><use href="#i-arrow-right"/></svg></button>
+            </div>
+          </div>
         </div>
 
         <div class="range">
           <label class="sr-only" for="sim-range">Prazo do contrato, de 6 a 60 meses</label>
           <input class="range__input" id="sim-range" type="range" min="6" max="60" step="6" value="36" aria-valuetext="36 meses" style="--p:55.56%" data-range>
-          <div class="range__ticks" aria-hidden="true"><span>6</span><span>12</span><span>18</span><span>24</span><span>30</span><span>36</span><span>42</span><span>48</span><span>54</span><span>60</span></div>
+          <div class="range__ticks" role="group" aria-label="Escolher o prazo do contrato"><button type="button" class="range__pick" data-term-pick="6" aria-pressed="false" aria-label="Contrato de 6 meses">6</button><button type="button" class="range__pick" data-term-pick="12" aria-pressed="false" aria-label="Contrato de 12 meses">12</button><button type="button" class="range__pick" data-term-pick="18" aria-pressed="false" aria-label="Contrato de 18 meses">18</button><button type="button" class="range__pick" data-term-pick="24" aria-pressed="false" aria-label="Contrato de 24 meses">24</button><button type="button" class="range__pick" data-term-pick="30" aria-pressed="false" aria-label="Contrato de 30 meses">30</button><button type="button" class="range__pick" data-term-pick="36" aria-pressed="true" aria-label="Contrato de 36 meses">36</button><button type="button" class="range__pick" data-term-pick="42" aria-pressed="false" aria-label="Contrato de 42 meses">42</button><button type="button" class="range__pick" data-term-pick="48" aria-pressed="false" aria-label="Contrato de 48 meses">48</button><button type="button" class="range__pick" data-term-pick="54" aria-pressed="false" aria-label="Contrato de 54 meses">54</button><button type="button" class="range__pick" data-term-pick="60" aria-pressed="false" aria-label="Contrato de 60 meses">60</button></div>
+          <div class="range__foot">
+            <span class="range__hint">Arraste, clique num prazo ou use as setas do teclado.</span>
+            <button class="range__play" type="button" aria-pressed="false" data-term-play>
+              <svg class="icon icon--sm range__play-ic" aria-hidden="true"><use href="#i-play"/></svg>
+              <span data-term-play-lbl>Percorrer de 6 a 60 meses</span>
+            </button>
+          </div>
         </div>
 
         <div class="simcard__panel" id="sim-panel">
           <dl class="kpis">
-            <div class="kpi"><dt>ROI</dt><dd data-kpi="roi" data-decimals="1" data-suffix="%">21,4%</dd></div>
-            <div class="kpi"><dt>Margem</dt><dd data-kpi="margem" data-decimals="1" data-suffix="%">18,4%</dd></div>
-            <div class="kpi"><dt>EBITDA</dt><dd data-kpi="ebitda" data-decimals="0" data-prefix="R$ ">R$ 39.253</dd></div>
-            <div class="kpi"><dt>ROA <small>a.a.</small></dt><dd data-kpi="roa" data-decimals="1" data-suffix="%">8,1%</dd></div>
+            <div class="kpi" tabindex="0"><dt><span class="kpi__lbl">ROI<svg class="icon kpi__info" aria-hidden="true"><use href="#i-help"/></svg></span><span class="kpi__tip" role="tooltip">Retorno sobre o investimento: resultado acumulado do contrato dividido pelo valor de compra do veículo.</span></dt><dd data-kpi="roi" data-decimals="1" data-suffix="%">21,4%</dd></div>
+            <div class="kpi" tabindex="0"><dt><span class="kpi__lbl">Margem<svg class="icon kpi__info" aria-hidden="true"><use href="#i-help"/></svg></span><span class="kpi__tip" role="tooltip">Quanto da receita de locação vira resultado: resultado do contrato dividido pela soma das mensalidades.</span></dt><dd data-kpi="margem" data-decimals="1" data-suffix="%">18,4%</dd></div>
+            <div class="kpi" tabindex="0"><dt><span class="kpi__lbl">EBITDA<svg class="icon kpi__info" aria-hidden="true"><use href="#i-help"/></svg></span><span class="kpi__tip" role="tooltip">Resultado operacional antes de juros, impostos, depreciação e amortização, somado no prazo do contrato.</span></dt><dd data-kpi="ebitda" data-decimals="0" data-prefix="R$ ">R$ 39.253</dd></div>
+            <div class="kpi" tabindex="0"><dt><span class="kpi__lbl">ROA <small>a.a.</small><svg class="icon kpi__info" aria-hidden="true"><use href="#i-help"/></svg></span><span class="kpi__tip" role="tooltip">Retorno sobre o ativo ao ano: resultado anualizado dividido pelo valor médio do veículo durante o contrato.</span></dt><dd data-kpi="roa" data-decimals="1" data-suffix="%">8,1%</dd></div>
           </dl>
           <p class="sr-only" aria-live="polite" data-sim-live></p>
 
@@ -722,6 +738,7 @@
               </div>
               <span class="chart__pt chart__pt--pay" data-pt-pay><em>Equilíbrio</em></span>
               <span class="chart__pt chart__pt--end" data-pt-end><em data-pt-end-lbl>R$ 18,5 mil</em></span>
+              <span class="chart__hover" data-chart-hover aria-hidden="true"><i></i><em></em></span>
             </div>
             <div class="chart__x"><span>Mês 0</span><span data-x-mid>18</span><span data-x-end>36</span></div>
           </div>
@@ -776,8 +793,8 @@
         <p class="rt__copy">Mesmo veículo, mensalidade, prazo e custos. Sem adaptar a precificação, uma locadora pode perder <b>mais de 3,3 p.p. de rentabilidade</b>.</p>
         <p class="rt__note">Fonte: simulação PriceFleet. Margens ilustrativas.</p>
         <div class="rt__partner">
-          <span class="rt__partner-logo">Audit LocOne</span>
-          <span><b>Auditado e homologado pela Audit LocOne.</b> A contabilidade responsável pela auditoria do PriceFleet validou a plataforma como a primeira solução homologada para precificar contratos na nova Reforma Tributária.</span>
+          <span class="rt__partner-ic" aria-hidden="true"><svg class="icon"><use href="#i-shield"/></svg></span>
+          <p class="rt__partner-txt"><b>Auditado pela Audit LocOne, a contabilidade responsável.</b><span>Primeira solução homologada para a nova Reforma Tributária.</span></p>
         </div>
       </div>
     </div>
@@ -849,16 +866,17 @@
             <div class="orbit">
               <div class="orbit__ring">
                 <div class="orbit__slot" style="--a:-90deg"><span class="orbit__pos"><span class="orbit__node">FIPE</span></span></div>
-                <div class="orbit__slot" style="--a:-18deg"><span class="orbit__pos"><span class="orbit__node">DataCar</span></span></div>
-                <div class="orbit__slot" style="--a:54deg"><span class="orbit__pos"><span class="orbit__node">M. Depreciação</span></span></div>
-                <div class="orbit__slot" style="--a:126deg"><span class="orbit__pos"><span class="orbit__node">Residual</span></span></div>
-                <div class="orbit__slot" style="--a:198deg"><span class="orbit__pos"><span class="orbit__node">Média</span></span></div>
+                <div class="orbit__slot" style="--a:-30deg"><span class="orbit__pos"><span class="orbit__node">DataCar</span></span></div>
+                <div class="orbit__slot" style="--a:30deg"><span class="orbit__pos"><span class="orbit__node">M. Depreciação</span></span></div>
+                <div class="orbit__slot" style="--a:90deg"><span class="orbit__pos"><span class="orbit__node orbit__node--crm"><svg class="icon"><use href="#i-users"/></svg>CRM</span></span></div>
+                <div class="orbit__slot" style="--a:150deg"><span class="orbit__pos"><span class="orbit__node">Residual</span></span></div>
+                <div class="orbit__slot" style="--a:210deg"><span class="orbit__pos"><span class="orbit__node">Média</span></span></div>
               </div>
               <div class="orbit__core"><svg viewBox="0 0 32 32"><use href="#logo-mark"/></svg></div>
             </div>
             <div class="fxv__chip"><span>Valor final de venda</span><b>R$ 65.494,54</b></div>
           </div>
-          <p class="fxv__cap">Referências de mercado combinadas na projeção do valor de venda.</p>
+          <p class="fxv__cap">Referências de mercado e o CRM da sua empresa conectados ao cálculo.</p>
         </div>
         <div class="fx__panel" role="tabpanel" id="fx-p2" aria-labelledby="f-04" tabindex="0" hidden>
           <div class="fxv fxv--kpis" aria-hidden="true">
