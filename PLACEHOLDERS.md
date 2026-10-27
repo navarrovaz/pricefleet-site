@@ -15,7 +15,7 @@ e as respostas do FAQ sobre suporte e integrações.
 |---|---|---|
 | 1 | Logo oficial em SVG. O do site atual (`https://www.pricefleet.com.br/logo.svg`, 2 KB) pode ser usado, aguardando autorização para baixar | Navbar, rodapé, mockups, favicon, símbolo `#logo-mark` |
 | 2 | Arquivos de logo dos 15 clientes (hoje exibidos como nomes em texto, igual ao site atual) | Faixa "Empresas que confiam no PriceFleet" |
-| 3 | 3 depoimentos reais: nome, cargo, empresa, logo, foto autorizada e 1 resultado numérico | Carrossel em Resultados |
+| 3 | Depoimentos: o de Leonardo (Gerente de Pricing) já está no ar; faltam a empresa, o logo e a foto autorizada dele, e mais 2 depoimentos reais | Carrossel em Resultados |
 | 4 | Valores do mockup do hero, do card da planilha, da simulação, do simulador da Reforma Tributária (18,4% → 15,1%) e dos painéis de Diferenciais (proposta, log, tabela de custos) são **ilustrativos** | Hero, Problema, Como funciona, Simulação, Reforma Tributária, Diferenciais |
 | 5 | URL da área do cliente (botão "Entrar") | Navbar e menu mobile (hoje `href="#"`) |
 | 6 | Páginas `/sobre`, `/politica-de-privacidade`, `/termos-de-uso`, `/lgpd` | Rodapé, formulário e banner de cookies |

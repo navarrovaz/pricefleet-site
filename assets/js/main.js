@@ -327,19 +327,25 @@
     }
   })();
 
-  /* ---------- 3.6 Simulação: tabs + gráfico + KPIs ---------- */
+  /* ---------- 3.6 Simulação: prazo de 6 a 60 meses + gráfico + KPIs ---------- */
   (function simulation() {
     const sim = $('[data-sim]');
     if (!sim) return;
     // Modelo ilustrativo: resultado acumulado R(t) = -setup + a·t - b·t²
+    // price = mensalidade · a = resultado operacional mensal · res = valor residual no fim do prazo
     const M = {
-      compra: 86266.25, setup: 9000, b: 4, ymin: -12000, ymax: 22000,
+      compra: 86266.25, setup: 9000, b: 4, ymin: -12000, ymax: 32000,
       p: {
+        6: { price: 4200, a: 1700, res: 80200 },
         12: { price: 3390, a: 1020, res: 76100 },
         18: { price: 3150, a: 980, res: 72400 },
         24: { price: 2990, a: 950, res: 69300 },
         30: { price: 2870, a: 925, res: 67100 },
         36: { price: 2790, a: 907.36, res: 65494.54 },
+        42: { price: 2730, a: 893, res: 63900 },
+        48: { price: 2680, a: 880, res: 62400 },
+        54: { price: 2640, a: 869, res: 61000 },
+        60: { price: 2600, a: 858, res: 59700 },
       },
     };
     const SAMPLES = 36;
@@ -352,7 +358,9 @@
         roi: (r / M.compra) * 100,
         margem: (r / (p.price * n)) * 100,
         ebitda: r + (M.compra - p.res),
-        payback: (p.a - Math.sqrt(p.a * p.a - 4 * M.b * M.setup)) / (2 * M.b),
+        // ROA a.a.: resultado anualizado ÷ valor médio do veículo (ativo) no contrato
+        roa: ((r / (n / 12)) / ((M.compra + p.res) / 2)) * 100,
+        equilibrio: (p.a - Math.sqrt(p.a * p.a - 4 * M.b * M.setup)) / (2 * M.b),
       };
     };
     const yFrac = (v) => (M.ymax - v) / (M.ymax - M.ymin);
@@ -362,10 +370,8 @@
     const line = $('.chart__line', sim);
     const area = $('.chart__area', sim);
     const plot = $('[data-chart]', sim);
-    const panel = $('#sim-panel');
-    const tabs = $$('[role="tab"]', sim);
-    const seg = $('[data-tabs]', sim);
-    const ind = $('.seg__ind', sim);
+    const range = $('[data-range]', sim);
+    const term = $('[data-term]', sim);
     const kpi = Object.fromEntries($$('[data-kpi]', sim).map((el) => [el.dataset.kpi, el]));
     const ptPay = $('[data-pt-pay]', sim);
     const ptEnd = $('[data-pt-end]', sim);
@@ -374,7 +380,7 @@
     const xEnd = $('[data-x-end]', sim);
     const live = $('[data-sim-live]', sim);
 
-    let current = 36;
+    let current = +range.value;
     let ys = points(current);
     let anim = 0;
 
@@ -385,45 +391,33 @@
     };
     const markers = (n) => {
       const m = metrics(n);
-      ptPay.style.left = `${(m.payback / n) * 100}%`;
+      ptPay.style.left = `${(m.equilibrio / n) * 100}%`;
       ptPay.style.top = `${yFrac(0) * 100}%`;
-      $('em', ptPay).textContent = `Payback ${fmt(m.payback, 1)} m`;
+      $('em', ptPay).textContent = `Equilíbrio · mês ${fmt(m.equilibrio, 1)}`;
       ptEnd.style.left = '100%';
       ptEnd.style.top = `${yFrac(m.r) * 100}%`;
       ptEndLbl.textContent = `R$ ${fmt(m.r / 1000, 1)} mil`;
       xMid.textContent = String(n / 2);
       xEnd.textContent = `${n} meses`;
     };
-    const moveInd = () => {
-      const sel = tabs.find((t) => t.getAttribute('aria-selected') === 'true');
-      ind.style.width = `${sel.offsetWidth}px`;
-      ind.style.transform = `translateX(${sel.offsetLeft}px)`;
+    const syncRange = (n) => {
+      range.style.setProperty('--p', `${((n - 6) / 54) * 100}%`);
+      range.setAttribute('aria-valuetext', `${n} meses`);
+      term.textContent = `${n} meses`;
     };
 
     draw(ys);
     markers(current);
-    ind.style.transition = 'none';
-    moveInd();
-    requestAnimationFrame(() => { ind.style.transition = ''; seg.classList.add('is-ready'); });
-    addEventListener('resize', debounce(moveInd, 100));
-    if (document.fonts) document.fonts.ready.then(moveInd);
+    syncRange(current);
 
-    function setPeriod(n, focus) {
-      tabs.forEach((t) => {
-        const on = +t.dataset.months === n;
-        t.setAttribute('aria-selected', String(on));
-        t.tabIndex = on ? 0 : -1;
-        if (on && focus) t.focus();
-      });
-      panel.setAttribute('aria-labelledby', `tab-${n}`);
-      moveInd();
+    function setPeriod(n) {
+      syncRange(n);
       if (n === current) return;
-
       const prev = metrics(current);
       const next = metrics(n);
-      Object.keys(kpi).forEach((k) => countTo(kpi[k], next[k], { from: prev[k], dur: 900 }));
+      Object.keys(kpi).forEach((k) => countTo(kpi[k], next[k], { from: prev[k], dur: 700 }));
       markers(n);
-      live.textContent = `Prazo de ${n} meses: ROI ${fmt(next.roi, 1)}%, margem ${fmt(next.margem, 1)}%, EBITDA R$ ${fmt(next.ebitda, 0)}, payback em ${fmt(next.payback, 1)} meses. Valores ilustrativos.`;
+      live.textContent = `Prazo de ${n} meses: ROI ${fmt(next.roi, 1)}%, margem ${fmt(next.margem, 1)}%, EBITDA R$ ${fmt(next.ebitda, 0)}, ROA de ${fmt(next.roa, 1)}% ao ano. Valores ilustrativos.`;
 
       const from = ys.slice();
       const to = points(n);
@@ -442,19 +436,7 @@
       }
       current = n;
     }
-
-    tabs.forEach((t) => t.addEventListener('click', () => setPeriod(+t.dataset.months)));
-    seg.addEventListener('keydown', (e) => {
-      const i = tabs.findIndex((t) => t.getAttribute('aria-selected') === 'true');
-      let j = null;
-      if (e.key === 'ArrowRight') j = (i + 1) % tabs.length;
-      if (e.key === 'ArrowLeft') j = (i - 1 + tabs.length) % tabs.length;
-      if (e.key === 'Home') j = 0;
-      if (e.key === 'End') j = tabs.length - 1;
-      if (j === null) return;
-      e.preventDefault();
-      setPeriod(+tabs[j].dataset.months, true);
-    });
+    range.addEventListener('input', () => setPeriod(+range.value));
 
     // Entrada: desenha a linha (clip) e conta os KPIs
     const m0 = metrics(current);

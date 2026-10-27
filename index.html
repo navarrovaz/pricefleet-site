@@ -68,7 +68,7 @@
         "name": "Para qual tamanho de locadora o PriceFleet faz sentido?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "O PriceFleet foi desenhado para locadoras com frotas acima de 200 veículos, leves ou pesados. A partir desse volume, precificar em planilha passa a esconder prejuízos e a travar a área comercial. Se a sua frota está chegando a esse patamar, vale conversar."
+          "text": "O PriceFleet foi desenhado para locadoras com frotas acima de 100 veículos, leves ou pesados. A partir desse volume, precificar em planilha passa a esconder prejuízos e a travar a área comercial. Se a sua frota está chegando a esse patamar, vale conversar."
         }
       },
       {
@@ -100,7 +100,7 @@
         "name": "É possível simular fluxo de caixa e margem por contrato?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "Sim. Cada contrato tem simulação de fluxo de caixa e margem mês a mês, com ROI, ROA, Yield, EBITDA e resultado líquido. Você vê o impacto de cada condição antes de enviar a proposta."
+          "text": "Sim. Cada contrato, de 6 a 60 meses, tem simulação de fluxo de caixa e margem mês a mês, com ROI, ROA, Yield, EBITDA e resultado líquido. Você vê o impacto de cada condição antes de enviar a proposta."
         }
       },
       {
@@ -319,7 +319,7 @@
         <span class="btn__inner"><span class="btn__roll"><span class="btn__label">Ver como funciona</span><span class="btn__label" aria-hidden="true">Ver como funciona</span></span></span>
       </a>
     </div>
-    <p class="hero__trust" data-intro="up" style="--d:500ms">Para locadoras com frotas acima de 200 veículos · Leves e pesados</p>
+    <p class="hero__trust" data-intro="up" style="--d:500ms">Para locadoras com frotas acima de 100 veículos · Leves e pesados</p>
 
     <!-- Mockup: Projeção Residual (HTML/CSS) -->
     <div class="hero__mock" data-intro="mock" style="--d:550ms">
@@ -369,7 +369,7 @@
             <span class="mock__h">Projeção Residual</span>
             <div class="mock__period">
               <span class="mock__period-lbl">Período (meses)</span>
-              <span class="ptabs"><span>12</span><span>18</span><span>24</span><span>30</span><span class="is-active">36</span></span>
+              <span class="ptabs"><span>6</span><span>12</span><span>24</span><span class="is-active">36</span><span>48</span><span>60</span></span>
             </div>
           </div>
 
@@ -666,7 +666,7 @@
         <span class="line">Simule o contrato inteiro</span>
         <span class="line">antes de assinar.</span>
       </h2>
-      <p>Compare cenários de 12 a 36 meses e veja ROI, ROA, Yield, margem, EBITDA e fluxo de caixa de cada contrato. Em segundos, não em dias de planilha.</p>
+      <p>Compare cenários de 6 a 60 meses e veja ROI, ROA, Yield, margem, EBITDA e fluxo de caixa de cada contrato. Em segundos, não em dias de planilha.</p>
       <button class="btn btn--primary" type="button" data-demo>
         <span class="btn__inner"><span class="btn__roll"><span class="btn__label">Solicitar demonstração</span><span class="btn__label" aria-hidden="true">Solicitar demonstração</span></span></span>
       </button>
@@ -679,38 +679,35 @@
             <p class="simcard__title">Resultado acumulado do contrato</p>
             <p class="simcard__sub">Picape 1.4 · valor de compra R$ 86.266,25</p>
           </div>
-          <div class="seg-wrap">
-            <span class="seg-wrap__lbl" id="sim-prazo">Prazo (meses)</span>
-            <div class="seg" role="tablist" aria-labelledby="sim-prazo" data-tabs>
-              <span class="seg__ind" aria-hidden="true"></span>
-              <button class="seg__tab" type="button" role="tab" id="tab-12" aria-selected="false" aria-controls="sim-panel" tabindex="-1" data-months="12">12</button>
-              <button class="seg__tab" type="button" role="tab" id="tab-18" aria-selected="false" aria-controls="sim-panel" tabindex="-1" data-months="18">18</button>
-              <button class="seg__tab" type="button" role="tab" id="tab-24" aria-selected="false" aria-controls="sim-panel" tabindex="-1" data-months="24">24</button>
-              <button class="seg__tab" type="button" role="tab" id="tab-30" aria-selected="false" aria-controls="sim-panel" tabindex="-1" data-months="30">30</button>
-              <button class="seg__tab" type="button" role="tab" id="tab-36" aria-selected="true" aria-controls="sim-panel" tabindex="0" data-months="36">36</button>
-            </div>
-          </div>
+          <p class="simcard__term"><span>Prazo</span><b data-term>36 meses</b></p>
         </div>
 
-        <div class="simcard__panel" id="sim-panel" role="tabpanel" aria-labelledby="tab-36" tabindex="0">
+        <div class="range">
+          <label class="sr-only" for="sim-range">Prazo do contrato, de 6 a 60 meses</label>
+          <input class="range__input" id="sim-range" type="range" min="6" max="60" step="6" value="36" aria-valuetext="36 meses" style="--p:55.56%" data-range>
+          <div class="range__ticks" aria-hidden="true"><span>6</span><span>12</span><span>18</span><span>24</span><span>30</span><span>36</span><span>42</span><span>48</span><span>54</span><span>60</span></div>
+        </div>
+
+        <div class="simcard__panel" id="sim-panel">
           <dl class="kpis">
             <div class="kpi"><dt>ROI</dt><dd data-kpi="roi" data-decimals="1" data-suffix="%">21,4%</dd></div>
             <div class="kpi"><dt>Margem</dt><dd data-kpi="margem" data-decimals="1" data-suffix="%">18,4%</dd></div>
             <div class="kpi"><dt>EBITDA</dt><dd data-kpi="ebitda" data-decimals="0" data-prefix="R$ ">R$ 39.253</dd></div>
-            <div class="kpi"><dt>Payback</dt><dd data-kpi="payback" data-decimals="1" data-suffix=" meses">10,4 meses</dd></div>
+            <div class="kpi"><dt>ROA <small>a.a.</small></dt><dd data-kpi="roa" data-decimals="1" data-suffix="%">8,1%</dd></div>
           </dl>
           <p class="sr-only" aria-live="polite" data-sim-live></p>
 
           <div class="chart" aria-hidden="true">
             <div class="chart__y">
-              <span style="top:5.88%">R$ 20 mil</span>
-              <span style="top:35.29%">R$ 10 mil</span>
-              <span style="top:64.71%">R$ 0</span>
-              <span style="top:94.12%">−R$ 10 mil</span>
+              <span style="top:4.55%">R$ 30 mil</span>
+              <span style="top:27.27%">R$ 20 mil</span>
+              <span style="top:50%">R$ 10 mil</span>
+              <span style="top:72.73%">R$ 0</span>
+              <span style="top:95.45%">−R$ 10 mil</span>
             </div>
             <div class="chart__plot" data-chart>
-              <i class="chart__gl" style="top:5.88%"></i><i class="chart__gl" style="top:35.29%"></i><i class="chart__gl" style="top:94.12%"></i>
-              <div class="chart__zero" style="top:64.71%"><span>Ponto de equilíbrio</span></div>
+              <i class="chart__gl" style="top:4.55%"></i><i class="chart__gl" style="top:27.27%"></i><i class="chart__gl" style="top:50%"></i><i class="chart__gl" style="top:95.45%"></i>
+              <div class="chart__zero" style="top:72.73%"><span>Ponto de equilíbrio</span></div>
               <div class="chart__draw">
                 <svg viewBox="0 0 1000 300" preserveAspectRatio="none">
                   <defs>
@@ -723,12 +720,12 @@
                   <path class="chart__line" vector-effect="non-scaling-stroke" d=""/>
                 </svg>
               </div>
-              <span class="chart__pt chart__pt--pay" data-pt-pay><em>Payback</em></span>
+              <span class="chart__pt chart__pt--pay" data-pt-pay><em>Equilíbrio</em></span>
               <span class="chart__pt chart__pt--end" data-pt-end><em data-pt-end-lbl>R$ 18,5 mil</em></span>
             </div>
             <div class="chart__x"><span>Mês 0</span><span data-x-mid>18</span><span data-x-end>36</span></div>
           </div>
-          <p class="simcard__note"><span class="ph">[valores ilustrativos]</span> Modelo simplificado para demonstração.</p>
+          <p class="simcard__note"><span class="ph">[valores ilustrativos]</span> ROA a.a.: resultado anualizado sobre o valor médio do veículo no contrato.</p>
         </div>
       </div>
     </div>
@@ -780,7 +777,7 @@
         <p class="rt__note">Fonte: simulação PriceFleet. Margens ilustrativas.</p>
         <div class="rt__partner">
           <span class="rt__partner-logo">Audit LocOne</span>
-          <span>Desenvolvido em parceria. Primeira solução acreditada para simular preços de locadoras na Reforma Tributária.</span>
+          <span><b>Auditado e homologado pela Audit LocOne.</b> A contabilidade responsável pela auditoria do PriceFleet validou a plataforma como a primeira solução homologada para precificar contratos na nova Reforma Tributária.</span>
         </div>
       </div>
     </div>
@@ -812,7 +809,7 @@
         <button class="fx__tab" type="button" role="tab" id="f-04" aria-selected="false" aria-controls="fx-p2" tabindex="-1">
           <span class="fx__ic"><svg class="icon" aria-hidden="true"><use href="#i-trend"/></svg></span>
           <span class="fx__title">Simulação completa</span>
-          <span class="fx__desc"><span>ROI, ROA, Yield, EBITDA e fluxo de caixa de cada contrato, antes de assinar.</span></span>
+          <span class="fx__desc"><span>ROI, ROA, Yield, EBITDA e fluxo de caixa de cada contrato, de 6 a 60 meses.</span></span>
           <span class="fx__bar" aria-hidden="true"><i></i></span>
         </button>
         <button class="fx__tab" type="button" role="tab" id="f-06" aria-selected="false" aria-controls="fx-p3" tabindex="-1">
@@ -842,7 +839,7 @@
         <button class="fx__tab" type="button" role="tab" id="f-07" aria-selected="false" aria-controls="fx-p7" tabindex="-1">
           <span class="fx__ic"><svg class="icon" aria-hidden="true"><use href="#i-code"/></svg></span>
           <span class="fx__title">Integrações e API</span>
-          <span class="fx__desc"><span>FIPE, DataCar, Locavia, BlueFleet e API para sistemas próprios.</span></span>
+          <span class="fx__desc"><span>FIPE, DataCar, Locavia, BlueFleet, o CRM da sua empresa e API para sistemas próprios.</span></span>
           <span class="fx__bar" aria-hidden="true"><i></i></span>
         </button>
       </div>
@@ -870,7 +867,7 @@
                 <div><span>ROI</span><b>21,4%</b></div>
                 <div><span>Margem</span><b>18,4%</b></div>
                 <div><span>EBITDA</span><b>R$ 39.253</b></div>
-                <div><span>Payback</span><b>10,4 m</b></div>
+                <div><span>ROA a.a.</span><b>8,1%</b></div>
               </div>
               <svg class="fxv__spark" viewBox="0 0 300 80" preserveAspectRatio="none">
                 <defs><linearGradient id="g-fx" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#009844" stop-opacity=".16"/><stop offset="1" stop-color="#009844" stop-opacity="0"/></linearGradient></defs>
@@ -934,14 +931,14 @@
         <div class="fx__panel" role="tabpanel" id="fx-p7" aria-labelledby="f-07" tabindex="0" hidden>
           <div class="fxv fxv--hub" aria-hidden="true">
             <svg class="fxv__wires" viewBox="0 0 400 240" preserveAspectRatio="none">
-              <path d="M110 60 C150 60 160 120 200 120"/><path d="M110 180 C150 180 160 120 200 120"/>
+              <path d="M110 40 C150 40 160 120 200 120"/><path d="M110 120 L200 120"/><path d="M110 200 C150 200 160 120 200 120"/>
               <path d="M290 40 C250 40 240 120 200 120"/><path d="M290 120 L200 120"/><path d="M290 200 C250 200 240 120 200 120"/>
             </svg>
-            <div class="fxv__hub-col"><span>FIPE</span><span>DataCar</span></div>
+            <div class="fxv__hub-col"><span>FIPE</span><span>DataCar</span><span><svg class="icon"><use href="#i-users"/></svg>CRM</span></div>
             <div class="fxv__hub-core"><svg viewBox="0 0 32 32"><use href="#logo-mark"/></svg></div>
             <div class="fxv__hub-col"><span>Locavia</span><span>BlueFleet</span><span><svg class="icon"><use href="#i-code"/></svg>API</span></div>
           </div>
-          <p class="fxv__cap">Integrações nativas e API para sistemas próprios ou legados.</p>
+          <p class="fxv__cap">Dados de mercado, ERP e o CRM da sua empresa conectados ao preço.</p>
         </div>
       </div>
     </div>
@@ -1015,6 +1012,7 @@
         <span class="line">Locadoras que pararam</span>
         <span class="line">de precificar no escuro.</span>
       </h2>
+      <p class="section-head__text" data-reveal="up">Resultados reais de quem confiou na inteligência do PriceFleet.</p>
     </header>
 
     <ul class="stats" data-stagger>
@@ -1038,16 +1036,14 @@
         <ul class="carousel__track">
           <li class="slide" role="group" aria-roledescription="slide" aria-label="1 de 3">
             <article class="tcard">
-              <div class="tcard__media" aria-hidden="true"><span class="tcard__avatar">?</span><span class="ph">[cliente fornece: foto autorizada]</span></div>
+              <div class="tcard__media" aria-hidden="true"><span class="tcard__avatar">L</span></div>
               <div class="tcard__body">
                 <span class="tcard__quote" aria-hidden="true">“</span>
-                <p class="tcard__text">Depoimento em breve.</p>
-                <span class="ph">[cliente fornece: citação real, com autorização]</span>
+                <blockquote class="tcard__text">Já perdemos contratos por demorar semanas para precificar. Hoje consigo fazer 200 precificações em um único dia.</blockquote>
                 <div class="tcard__meta">
-                  <div><p class="tcard__name">[Nome do cliente]</p><p class="tcard__role">[Cargo] · [Empresa]</p></div>
-                  <span class="tcard__logo">[logo]</span>
+                  <div><p class="tcard__name">Leonardo</p><p class="tcard__role">Gerente de Pricing <span class="ph" data-validar="Empresa, logo e foto autorizada do depoimento de Leonardo">[validar: empresa]</span></p></div>
                 </div>
-                <span class="chip">[validar: +X p.p. de margem]</span>
+                <span class="chip">200 precificações em um único dia</span>
               </div>
             </article>
           </li>
@@ -1185,7 +1181,7 @@
     <div class="faq" data-faq data-stagger>
       <div class="faq__item" data-reveal="up">
         <h3 class="faq__q"><button type="button" id="faq-b1" aria-expanded="false" aria-controls="faq-p1">Para qual tamanho de locadora o PriceFleet faz sentido?<span class="faq__ic" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></button></h3>
-        <div class="faq__panel" id="faq-p1" role="region" aria-labelledby="faq-b1"><div><p>O PriceFleet foi desenhado para locadoras com frotas acima de 200 veículos, leves ou pesados. A partir desse volume, precificar em planilha passa a esconder prejuízos e a travar a área comercial. Se a sua frota está chegando a esse patamar, vale conversar.</p></div></div>
+        <div class="faq__panel" id="faq-p1" role="region" aria-labelledby="faq-b1"><div><p>O PriceFleet foi desenhado para locadoras com frotas acima de 100 veículos, leves ou pesados. A partir desse volume, precificar em planilha passa a esconder prejuízos e a travar a área comercial. Se a sua frota está chegando a esse patamar, vale conversar.</p></div></div>
       </div>
       <div class="faq__item" data-reveal="up">
         <h3 class="faq__q"><button type="button" id="faq-b2" aria-expanded="false" aria-controls="faq-p2">O PriceFleet substitui minhas planilhas de precificação?<span class="faq__ic" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></button></h3>
@@ -1201,7 +1197,7 @@
       </div>
       <div class="faq__item" data-reveal="up">
         <h3 class="faq__q"><button type="button" id="faq-b5" aria-expanded="false" aria-controls="faq-p5">É possível simular fluxo de caixa e margem por contrato?<span class="faq__ic" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></button></h3>
-        <div class="faq__panel" id="faq-p5" role="region" aria-labelledby="faq-b5"><div><p>Sim. Cada contrato tem simulação de fluxo de caixa e margem mês a mês, com ROI, ROA, Yield, EBITDA e resultado líquido. Você vê o impacto de cada condição antes de enviar a proposta.</p></div></div>
+        <div class="faq__panel" id="faq-p5" role="region" aria-labelledby="faq-b5"><div><p>Sim. Cada contrato, de 6 a 60 meses, tem simulação de fluxo de caixa e margem mês a mês, com ROI, ROA, Yield, EBITDA e resultado líquido. Você vê o impacto de cada condição antes de enviar a proposta.</p></div></div>
       </div>
       <div class="faq__item" data-reveal="up">
         <h3 class="faq__q"><button type="button" id="faq-b6" aria-expanded="false" aria-controls="faq-p6">Ele se integra com FIPE, DataCar, Locavia e BlueFleet?<span class="faq__ic" aria-hidden="true"><svg class="icon"><use href="#i-plus"/></svg></span></button></h3>
@@ -1355,7 +1351,7 @@
           <label for="f-frota">Tamanho da frota</label>
           <select id="f-frota" name="frota" required aria-describedby="e-frota">
             <option value="">Selecione</option>
-            <option>200–500</option>
+            <option>100–500</option>
             <option>500–1.000</option>
             <option>1.000–5.000</option>
             <option>5.000+</option>
