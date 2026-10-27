@@ -5,7 +5,7 @@ O botão flutuante **"Pontos a validar"** (canto inferior esquerdo) lista e dest
 `data-review-tool` do HTML e a seção "FERRAMENTA DE REVISÃO" do CSS antes de publicar.
 
 ## Já resolvido com dados do site atual (pricefleet.com.br)
-E-mail, telefone, WhatsApp, endereço, LinkedIn, Instagram, crédito à Rumo Soluções, os 3 posts reais do blog,
+Logo oficial e favicon (Figma "Identidade Visual", em `assets/img/brand/`), e-mail, telefone, WhatsApp, endereço, LinkedIn, Instagram, crédito à Rumo Soluções, os 3 posts reais do blog,
 a lista de 15 clientes, "até 90% menos tempo de aprovação", "dezenas de locadoras", a parceria com a Audit LocOne,
 o estudo de −3,3 p.p. da Reforma Tributária, as 8 etapas do processo, os indicadores (ROI, ROA, Yield, EBITDA)
 e as respostas do FAQ sobre suporte e integrações.
@@ -13,7 +13,6 @@ e as respostas do FAQ sobre suporte e integrações.
 ## Pendente
 | # | Item | Onde |
 |---|---|---|
-| 1 | Logo oficial em SVG. O do site atual (`https://www.pricefleet.com.br/logo.svg`, 2 KB) pode ser usado, aguardando autorização para baixar | Navbar, rodapé, mockups, favicon, símbolo `#logo-mark` |
 | 2 | Arquivos de logo dos 15 clientes (hoje exibidos como nomes em texto, igual ao site atual) | Faixa "Empresas que confiam no PriceFleet" |
 | 3 | Depoimentos: o de Leonardo (Gerente de Pricing) já está no ar; faltam a empresa, o logo e a foto autorizada dele, e mais 2 depoimentos reais | Carrossel em Resultados |
 | 4 | Valores do mockup do hero, do card da planilha, da simulação, do simulador da Reforma Tributária (18,4% → 15,1%) e dos painéis de Diferenciais (proposta, log, tabela de custos) são **ilustrativos** | Hero, Problema, Como funciona, Simulação, Reforma Tributária, Diferenciais |

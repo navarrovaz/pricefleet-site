@@ -263,6 +263,7 @@ h1, h2, h3, h4 { color: var(--pf-ink); font-weight: 700; }
 
 /* Logo */
 .logo { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; }
+.logo__img { display: block; width: auto; height: 40px; }
 .logo__mark { width: 32px; height: 32px; }
 .logo__word { font-size: 20px; line-height: 24px; font-weight: 700; color: var(--pf-ink); letter-spacing: -0.01em; }
 .logo__word span { color: var(--pf-green-700); }
@@ -1487,6 +1488,7 @@ html.tab-hidden * { animation-play-state: paused !important; }
   .t-stat { font-size: 56px; line-height: 56px; }
   .t-lead, .section-head__text, .final__text { font-size: 16px; line-height: 26px; }
   .nav__cta { display: none; }
+  .nav .logo__img { height: 34px; }
   .hero { padding-top: 128px; }
   .hero__badge { font-size: 13px; }
   .hero__ctas { flex-direction: column; align-self: stretch; }
