@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Página não encontrada | PriceFleet</title>
+  <meta name="robots" content="noindex">
+  <script>
+    // GitHub Pages não reescreve URLs: /blog/<slug> cai aqui e segue para o template
+    // único de artigo, que restaura a URL bonita. Em servidor próprio, prefira a regra
+    // de reescrita descrita em docs/BLOG.md (responde 200 direto).
+    (function () {
+      var m = location.pathname.match(/^(.*\/)blog\/([^\/?#]+)\/?$/);
+      if (m && !/\.html$/.test(m[2])) location.replace(m[1] + 'blog/artigo.html?slug=' + m[2] + location.hash);
+    })();
+  </script>
+  <style>
+    body { margin: 0; min-height: 100vh; display: grid; place-items: center; padding: 24px; background: #F6F7F7; color: #5B6660;
+      font: 16px/24px "Nunito Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif; }
+    main { max-width: 480px; text-align: center; }
+    h1 { margin: 12px 0 8px; color: #12201A; font-size: 32px; line-height: 40px; }
+    a { display: inline-flex; margin-top: 20px; padding: 14px 24px; border-radius: 999px; background: #007A37; color: #fff; font-weight: 700; text-decoration: none; }
+    a:focus-visible { outline: 3px solid #C5D031; outline-offset: 3px; }
+  </style>
+</head>
+<body>
+  <main>
+    <p>Erro 404</p>
+    <h1>Página não encontrada.</h1>
+    <p>O endereço pode ter mudado. Volte para o início ou visite o blog.</p>
+    <a href="/" data-home>Ir para o início</a>
+  </main>
+  <script>
+    // No GitHub Pages o site vive em /<repositório>/.
+    var seg = location.hostname.endsWith('github.io') ? location.pathname.split('/')[1] : '';
+    document.querySelector('[data-home]').href = seg ? '/' + seg + '/' : '/';
+  </script>
+</body>
+</html>

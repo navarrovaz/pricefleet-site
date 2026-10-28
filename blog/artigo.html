@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="pt-BR" class="no-js" data-root="../">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!--
+    Template único de artigo. Atende todas as URLs /blog/<slug>:
+    o título, a imagem, o conteúdo e as informações vêm do CMS (ver assets/js/blog.js).
+    Título, descrição, canonical e Open Graph abaixo são substituídos pelos do artigo.
+  -->
+  <title>Blog | PriceFleet</title>
+  <meta name="description" content="Artigos do PriceFleet sobre precificação de contratos, rentabilidade de frota e Reforma Tributária para locadoras de veículos.">
+  <!-- Versão de revisão: não indexar. Remover no deploy do domínio oficial. -->
+  <meta name="robots" content="noindex, nofollow">
+  <link rel="canonical" href="https://www.pricefleet.com.br/blog">
+  <meta name="theme-color" content="#009844">
+
+  <meta property="og:type" content="article">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:site_name" content="PriceFleet">
+  <meta property="og:url" content="https://www.pricefleet.com.br/blog">
+  <meta property="og:title" content="Blog PriceFleet">
+  <meta property="og:description" content="Artigos sobre precificação de contratos, rentabilidade de frota e Reforma Tributária para locadoras de veículos.">
+  <meta property="og:image" content="https://www.pricefleet.com.br/assets/og/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+
+  <link rel="icon" href="../assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="../assets/img/apple-touch-icon.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="preconnect" href="https://stgpricefleet.blob.core.windows.net">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@400;600;700&display=swap">
+  <link rel="stylesheet" href="../assets/css/styles.css?v=20261027e">
+  <link rel="stylesheet" href="../assets/css/blog.css?v=20261027e">
+  <script>document.documentElement.classList.replace('no-js', 'js');</script>
+  <script src="../assets/js/blog-config.js?v=20261027e" defer></script>
+  <script src="../assets/js/blog-md.js?v=20261027e" defer></script>
+  <script src="../assets/js/blog.js?v=20261027e" defer></script>
+</head>
+<body data-page="post">
+
+<!-- Navbar, sprite de ícones e link de pular: injetados a partir do index.html -->
+<div data-chrome="top"></div>
+
+<main id="conteudo" class="blog" data-post aria-busy="true">
+  <div class="art__head wrap" data-skeleton aria-hidden="true">
+    <div class="measure art__head-in">
+      <span class="sk" style="width:180px;height:20px"></span>
+      <span class="sk" style="width:120px;height:32px;border-radius:999px"></span>
+      <span class="sk" style="width:100%;height:52px"></span>
+      <span class="sk" style="width:70%;height:52px"></span>
+      <span class="sk" style="width:90%;height:24px"></span>
+    </div>
+  </div>
+  <div class="art__cover wrap" data-skeleton aria-hidden="true"><div class="art__cover-in sk"></div></div>
+  <div class="art__head wrap" data-load-error hidden>
+    <div class="measure art__head-in">
+      <h1 class="art__title">Não foi possível carregar o artigo.</h1>
+      <p class="art__lead">Atualize a página em instantes ou volte para o <a class="link-u" href="./">blog</a>.</p>
+    </div>
+  </div>
+</main>
+
+<!-- CTA final, rodapé, modal de demonstração e aviso de cookies: injetados a partir do index.html -->
+<div data-chrome="bottom"></div>
+
+</body>
+</html>

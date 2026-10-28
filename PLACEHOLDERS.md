@@ -5,7 +5,7 @@ O botão flutuante **"Pontos a validar"** (canto inferior esquerdo) lista e dest
 `data-review-tool` do HTML e a seção "FERRAMENTA DE REVISÃO" do CSS antes de publicar.
 
 ## Já resolvido com dados do site atual (pricefleet.com.br)
-Logo oficial e favicon (Figma "Identidade Visual", em `assets/img/brand/`), e-mail, telefone, WhatsApp, endereço, LinkedIn, Instagram, crédito à Rumo Soluções, os 3 posts reais do blog,
+Logo oficial e favicon (Figma "Identidade Visual", em `assets/img/brand/`), e-mail, telefone, WhatsApp, endereço, LinkedIn, Instagram, crédito à Rumo Soluções, os 15 artigos do blog (lidos do CMS atual),
 a lista de 15 clientes, "até 90% menos tempo de aprovação", "dezenas de locadoras", a parceria com a Audit LocOne,
 o estudo de −3,3 p.p. da Reforma Tributária, as 8 etapas do processo, os indicadores (ROI, ROA, Yield, EBITDA)
 e as respostas do FAQ sobre suporte e integrações.
@@ -19,7 +19,7 @@ e as respostas do FAQ sobre suporte e integrações.
 | 5 | URL da área do cliente (botão "Entrar") | Navbar e menu mobile (hoje `href="#"`) |
 | 6 | Páginas `/sobre`, `/politica-de-privacidade`, `/termos-de-uso`, `/lgpd` | Rodapé, formulário e banner de cookies |
 | 7 | SLA de retorno ("em até 1 dia útil") | Tela de sucesso do formulário |
-| 8 | Endpoint do formulário: preencher `data-endpoint` em `form[data-demo-form]` (POST JSON com nome, email, telefone, empresa, cargo, frota, origem, mensagem, consentimento). Sem endpoint, o envio é **simulado** | Modal de demonstração |
+| 8 | Endpoint do formulário: preencher `data-endpoint` em `form[data-demo-form]` (POST JSON com nome, email, telefone, empresa, cargo, frota, origem, mensagem, consentimento). Sem endpoint, o envio é **simulado**. O site atual envia os leads para `POST /api/v1/public/leads`; vale avaliar o mesmo endpoint | Modal de demonstração |
 
 ## Rastreamento (preencher no deploy de produção)
 Os IDs ficam em `TRACKING`, no fim de `assets/js/main.js`. Nada é carregado antes de o visitante clicar em "Aceitar".
@@ -41,4 +41,12 @@ O envio do formulário gera o evento `demo_request` no dataLayer e `Lead` no Pix
 | 9 | Domínio final em `canonical`, `og:url` e `og:image` |
 | 10 | Regerar `assets/og/og-image.png` a partir de `assets/og/og.html` se o mockup mudar |
 | 11 | Em produção: hospedar a Nunito Sans no próprio servidor e fazer preload do woff2 700 |
-| 12 | Manter as URLs `/blog/...` ativas no novo site (os cards apontam para elas) |
+| 12 | Servidor de produção: regra de reescrita `/blog/<slug>` → `/blog/artigo.html` (exemplos em `docs/BLOG.md`). No GitHub Pages o `404.html` já resolve |
+
+## Blog (detalhes em `docs/BLOG.md`)
+| # | Item |
+|---|---|
+| 13 | Curtidas, visualizações e comentários hoje ficam salvos **só no navegador de quem interage** (aviso "Ambiente de revisão" no artigo). Para valer para todos: criar o projeto no Supabase, rodar `supabase/blog.sql` e preencher `store` em `assets/js/blog-config.js` |
+| 14 | Fora do domínio oficial o blog usa o snapshot `content/blog/posts.json`. Após publicar um artigo no CMS, rodar `node scripts/sync-blog.mjs` e fazer commit. No domínio oficial a API do CMS é lida ao vivo |
+| 15 | Moderação de comentários: decidir se publicam na hora (padrão) ou só após aprovação |
+| 16 | Opcional: pré-renderizar as metatags dos artigos no servidor para prévias em redes sociais com a imagem de cada artigo |
