@@ -1200,6 +1200,13 @@ html.menu-open { overflow: hidden; }
 .post__meta { font-size: 12px; line-height: 16px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--pf-green-700); }
 .post__title { font-size: 18px; line-height: 26px; }
 .post__link:hover .post__title { text-decoration: underline; text-underline-offset: 4px; text-decoration-thickness: 1.5px; }
+.post__body { flex: 1; }
+.post__more {
+  display: inline-flex; align-items: center; gap: 6px; margin-top: auto; padding-top: 8px;
+  font-size: 15px; line-height: 20px; font-weight: 600; color: var(--pf-green-700);
+}
+.post__more .icon { transition: transform var(--motion-fast) var(--ease-out); }
+.post__link:hover .post__more .icon { transform: translateX(4px); }
 
 /* 3.11 FAQ */
 .faq { max-width: 760px; margin-inline: auto; border-top: 1px solid var(--pf-line); }
